@@ -10,7 +10,7 @@ import {
   AUTH_CHECK,
 } from "../../store/constants/userConstants";
 
-
+import setAuthToken  from "../../utils/setAuthToken";
 
 
 export const login = (email, password) => async (dispatch) => {
@@ -35,9 +35,11 @@ export const login = (email, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     })
-
+    
     localStorage.setItem('userInfo', JSON.stringify(data))
-    localStorage.setItem("authToken", data.results.data);
+    const token = data.results.data
+    localStorage.setItem("authToken", token);
+    setAuthToken(token);
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -51,7 +53,7 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
-   localStorage.removeItem("authToken");
+  localStorage.removeItem("authToken");
   
   dispatch({ type: USER_LOGOUT })
   document.location.href = '/login'

@@ -5,16 +5,23 @@ import {
   CREATE_ORGANIZATION_FAIL,
 } from "../constants/organizationConstant";
 
+import setAuthToken from "../../utils/setAuthToken";
+
 export const createOrganization = (name, email, phone, address) => async (
   dispatch
 ) => {
+
+ 
   try {
 
-    const token = localStorage.getItem('authToken');
+       if (localStorage.token) {
+         setAuthToken(localStorage.token);
+       }
     
     dispatch({
       type: CREATE_ORGANIZATION_REQUEST,
     });
+   
 
     const config = {
       headers: {
@@ -32,6 +39,9 @@ export const createOrganization = (name, email, phone, address) => async (
       type: CREATE_ORGANIZATION_SUCCESS,
       payload: data,
     });
+        if (localStorage.token) {
+          setAuthToken(localStorage.token);
+        }
 
     localStorage.setItem("organization", JSON.stringify(data));
   } catch (error) {

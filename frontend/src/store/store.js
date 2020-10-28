@@ -7,6 +7,8 @@ import {
   userRegisterReducer,
 } from '../store/reducers/userReducers'
 
+import setAuthToken from '../utils/setAuthToken'
+
 import { createOrganizationReducer } from "../store/reducers/organizationReducer";
 
 const reducer = combineReducers({
@@ -21,6 +23,7 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
+  setAuthToken(localStorage.token)
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },

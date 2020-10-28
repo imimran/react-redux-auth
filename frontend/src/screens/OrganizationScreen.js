@@ -17,13 +17,7 @@ const OrganizationScreen = ({ location, history }) => {
   const addOrganization = useSelector((state) => state.addOrganization)
   const { loading, error, organization } = addOrganization
 
-  //const redirect = location.search ? location.search.split('=')[1] : '/'
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push(redirect)
-  //   }
-  // }, [history, userInfo, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -82,15 +76,6 @@ const OrganizationScreen = ({ location, history }) => {
           Create Organization
         </Button>
       </Form>
-
-      {/* <Row className="py-3">
-        <Col>
-          Have an Account?{" "}
-          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
-            Login
-          </Link>
-        </Col>
-      </Row> */}
     </FormContainer>
   );
 }
