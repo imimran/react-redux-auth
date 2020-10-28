@@ -4,6 +4,7 @@ import FormContainer from '../components/FormContainer'
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from '../store/actions/userActions'
+import Message from "../components/Message";
 
 
 const LoginScreen = ({ location, history }) => {
@@ -35,6 +36,7 @@ const LoginScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Sign In</h1>
+      {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
           <Form.Label>Email Address</Form.Label>

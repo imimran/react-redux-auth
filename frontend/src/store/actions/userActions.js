@@ -7,7 +7,6 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
-  AUTH_CHECK,
 } from "../../store/constants/userConstants";
 
 import setAuthToken  from "../../utils/setAuthToken";
@@ -47,17 +46,19 @@ export const login = (email, password) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
-    })
+    });
   }
 }
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
   localStorage.removeItem("authToken");
+   localStorage.removeItem("organization");
   
   dispatch({ type: USER_LOGOUT })
   document.location.href = '/login'
 }
+
 
 export const register = (username, email, password) => async (dispatch) => {
   try {
@@ -72,8 +73,8 @@ export const register = (username, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/user/signup",
-      { username, email, password },
+      "http://localhost:4000/api/user/signup", 
+       { username, email, password }, 
       config
     );
 

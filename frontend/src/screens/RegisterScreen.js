@@ -4,6 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import { register } from '../store/actions/userActions'
+import Message from "../components/Message";
+
 
 const RegisterScreen = ({ location, history }) => {
   const [username, setUserName] = useState("");
@@ -32,9 +34,9 @@ const RegisterScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Sign Up</h1>
-      {/* {message && <Message variant='danger'>{message}</Message>}
+      {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />} */}
+     
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
           <Form.Label>Name</Form.Label>
