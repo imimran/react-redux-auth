@@ -20,9 +20,10 @@ export const login = (email, password) => async (dispatch) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        //"auth-token": localStorage.getItem("authToken"),
       },
-    }
+    };
 
     const { data } = await axios.post(
       "http://localhost:4000/api/auth/login",
@@ -70,6 +71,7 @@ export const register = (username, email, password) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
       },
     };
 
@@ -90,6 +92,9 @@ export const register = (username, email, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
+     const token = data.results.data;
+     localStorage.setItem("authToken", token);
+     setAuthToken(token);
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,

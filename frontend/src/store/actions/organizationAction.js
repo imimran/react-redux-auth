@@ -25,6 +25,7 @@ export const createOrganization = (name, email, phone, address) => async (
     const config = {
       headers: {
         "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
       },
     };
 
