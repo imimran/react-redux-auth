@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import OrganizationScreen from './screens/OrganizationScreen'
+import OrganizationListScreen from "./screens/OrganizationListScreen";
 
 
 
@@ -18,7 +19,8 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/organization" component={OrganizationScreen} />
+          <Route path="/organization/create" component={OrganizationScreen} />
+          <Route path="/organizations" component={OrganizationListScreen} />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>
