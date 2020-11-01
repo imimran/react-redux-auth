@@ -16,13 +16,20 @@ import {
 
 import {createEmployeeReducer, employeeListReducer} from '../store/reducers/employeeReducers'
 
+import {
+  createAnnouncementReducer,
+  announcementListReducer,
+} from "../store/reducers/anouncementReducers";
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   addOrganization: createOrganizationReducer,
   listOfOrganization: organizationListReducer,
   addEmployee: createEmployeeReducer,
-  listOfEmployee: employeeListReducer
+  listOfEmployee: employeeListReducer,
+  addAnnouncement: createAnnouncementReducer,
+  listOfAnnouncement: announcementListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
