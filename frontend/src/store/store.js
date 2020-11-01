@@ -7,25 +7,29 @@ import {
   userRegisterReducer,
 } from "../store/reducers/userReducers";
 
-import setAuthToken from "../utils/setAuthToken";
+//import setAuthToken from "../utils/setAuthToken";
 
 import {
   createOrganizationReducer,
   organizationListReducer,
 } from "../store/reducers/organizationReducer";
 
+import {createEmployeeReducer, employeeListReducer} from '../store/reducers/employeeReducers'
+
 const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   addOrganization: createOrganizationReducer,
   listOfOrganization: organizationListReducer,
+  addEmployee: createEmployeeReducer,
+  listOfEmployee: employeeListReducer
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
-setAuthToken(localStorage.token);
+//setAuthToken(localStorage.token);
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },

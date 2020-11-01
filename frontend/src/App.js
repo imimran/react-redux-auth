@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen'
 import OrganizationScreen from './screens/OrganizationScreen'
 import OrganizationListScreen from "./screens/OrganizationListScreen";
 import  PrivateRoute from "./utils/privateRoute";
+import CreateEmployeeScreen from './screens/CreateEmployeeScreen'
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
+          <Route path="/employee/create" component={CreateEmployeeScreen} />
           {/* <Route
             path="/organization/create"
             render={() => {

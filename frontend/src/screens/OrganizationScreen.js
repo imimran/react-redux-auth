@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import { createOrganization } from '../store/actions/organizationAction'
-
+import Message from "../components/Message";
 
 const OrganizationScreen = ({ location, history }) => {
   const [name, setName] = useState("");
@@ -28,9 +28,8 @@ const OrganizationScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Create Your Organization</h1>
-      {/* {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
-      {loading && <Loader />} */}
+      {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
