@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import OrganizationScreen from './screens/OrganizationScreen'
 import OrganizationListScreen from "./screens/OrganizationListScreen";
+import  PrivateRoute from "./utils/privateRoute";
 
 
 const App = () => {
@@ -26,10 +27,16 @@ const App = () => {
               return <OrganizationScreen />;
             }}
           /> */}
-       
-          <Route path="/organization/create" component={OrganizationScreen} />
-          <Route path="/organizations" component={OrganizationListScreen} />
-          <Route path="/" component={HomeScreen} exact />
+
+          <PrivateRoute
+            path="/organization/create"
+            component={OrganizationScreen}
+          />
+          <PrivateRoute
+            path="/organizations"
+            component={OrganizationListScreen}
+          />
+          <PrivateRoute path="/" component={HomeScreen} exact />
         </Container>
       </main>
       <Footer />
