@@ -1,23 +1,25 @@
-import axios from "axios";
 import {
-  CREATE_ANNOUNCEMENT_REQUEST,
-  CREATE_ANNOUNCEMENT_SUCCESS,
-  CREATE_ANNOUNCEMENT_FAIL,
-  ANNOUNCEMENT_LIST_REQUEST,
-  ANNOUNCEMENT_LIST_SUCCESS,
-  ANNOUNCEMENT_LIST_FAIL,
-} from "../constants/announcementConstants";
+  CREATE_PAYROLL_REQUEST,
+  CREATE_PAYROLL_SUCCESS,
+  CREATE_PAYROLL_FAIL,
+  PAYROLL_LIST_REQUEST,
+  PAYROLL_LIST_SUCCESS,
+  PAYROLL_LIST_FAIL,
+} from "../constants/payrollConstants";
 
+import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createAnnouncement = (message) => async (dispatch) => {
+export const createPayroll = (salary) => async (
+  dispatch
+) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
     dispatch({
-      type: CREATE_ANNOUNCEMENT_REQUEST,
+      type: CREATE_PAYROLL_REQUEST,
     });
 
     const config = {
@@ -28,26 +30,24 @@ export const createAnnouncement = (message) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/announcement",
-      { message },
+      "http://localhost:4000/api/payroll",
+      {  salary },
       config
     );
 
     dispatch({
-      type: CREATE_ANNOUNCEMENT_SUCCESS,
-      payload: data,
+      type: CREATE_PAYROLL_SUCCESS,
+      payload: data.results.data,
     });
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("announcement", JSON.stringify(data));
-
-    
+    localStorage.setItem("payroll", JSON.stringify(data.results.data));
   } catch (error) {
     dispatch({
-      type: CREATE_ANNOUNCEMENT_FAIL,
+      type: CREATE_PAYROLL_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -56,13 +56,13 @@ export const createAnnouncement = (message) => async (dispatch) => {
   }
 };
 
-export const listAnnouncement = () => async (dispatch) => {
+export const listPayroll = () => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    dispatch({ type: ANNOUNCEMENT_LIST_REQUEST });
+    dispatch({ type: PAYROLL_LIST_REQUEST });
 
     const config = {
       headers: {
@@ -71,14 +71,11 @@ export const listAnnouncement = () => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get(
-      "http://localhost:4000/api/announcement",
-      config
-    );
+    const { data } = await axios.get("http://localhost:4000/api/payroll", config);
 
     if (data.results) {
       dispatch({
-        type: ANNOUNCEMENT_LIST_SUCCESS,
+        type: PAYROLL_LIST_SUCCESS,
         payload: data.results.data,
       });
     }
@@ -86,10 +83,10 @@ export const listAnnouncement = () => async (dispatch) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-    localStorage.setItem("announcements", JSON.stringify(data));
+    localStorage.setItem("payrolls", JSON.stringify(data.results.data));
   } catch (error) {
     dispatch({
-      type: ANNOUNCEMENT_LIST_FAIL,
+      type: PAYROLL_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

@@ -6,20 +6,19 @@ import {
   userLoginReducer,
   userRegisterReducer,
 } from "../store/reducers/userReducers";
-
-//import setAuthToken from "../utils/setAuthToken";
-
 import {
   createOrganizationReducer,
   organizationListReducer,
 } from "../store/reducers/organizationReducer";
-
 import {createEmployeeReducer, employeeListReducer} from '../store/reducers/employeeReducers'
-
 import {
   createAnnouncementReducer,
   announcementListReducer,
 } from "../store/reducers/anouncementReducers";
+import {createAttendenceReducer, attendenceListReducer} from "../store/reducers/attendenceReducer";
+import {costListReducer, createCostReducer} from "../store/reducers/costReducers";
+import {createPayrollReducer, payrollListReducer} from "../store/reducers/payrollReducer";
+import {createLeaveReducer, leaveListReducer} from "../store/reducers/leavesReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -30,13 +29,19 @@ const reducer = combineReducers({
   listOfEmployee: employeeListReducer,
   addAnnouncement: createAnnouncementReducer,
   listOfAnnouncement: announcementListReducer,
+  addAttendence: createAttendenceReducer,
+  listOfAttendence: attendenceListReducer,
+  addCost: createCostReducer,
+  listOfCost: costListReducer,
+  addPayroll: createPayrollReducer,
+  listOfPayroll: payrollListReducer,
+  addLeave: createLeaveReducer,
+  listOfLeave: leaveListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
-
-//setAuthToken(localStorage.token);
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
