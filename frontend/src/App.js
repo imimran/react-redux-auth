@@ -10,6 +10,7 @@ import OrganizationScreen from './screens/OrganizationScreen'
 import OrganizationListScreen from "./screens/OrganizationListScreen";
 import  PrivateRoute from "./utils/privateRoute";
 import CreateEmployeeScreen from './screens/CreateEmployeeScreen'
+import EmployeeListScreen from './screens/EmployeeListScreen'
 
 
 const App = () => {
@@ -21,7 +22,11 @@ const App = () => {
         <Container>
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
-          <Route path="/employee/create" component={CreateEmployeeScreen} />
+          <PrivateRoute
+            path="/employee/create"
+            component={CreateEmployeeScreen}
+          />
+          <PrivateRoute path="/employees" component={EmployeeListScreen} />
           {/* <Route
             path="/organization/create"
             render={() => {
