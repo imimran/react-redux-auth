@@ -14,6 +14,7 @@ import EmployeeListScreen from './screens/EmployeeListScreen'
 import AnnouncementListScreen from "./screens/AnnouncementListScreen";
 import CreateAnouncementScreen from './screens/CreateAnnouncementScreen'
 import CreateAttendenceScreen from './screens/CreateAttendenceScreen'
+import AttendenceListScreen from './screens/AttendenceListScreen'
 
 
 
@@ -38,6 +39,10 @@ const App = () => {
           <PrivateRoute
             path="/attendence/create"
             component={CreateAttendenceScreen}
+          />
+          <PrivateRoute
+            path="/attendences"
+            component={AttendenceListScreen}
           />
           <PrivateRoute
             path="/employee/create"

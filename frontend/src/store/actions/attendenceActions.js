@@ -26,7 +26,11 @@ export const createAttendence = (month, leaves) => async(dispatch) => {
         }
     }
 
-    const { data } = await axios.post("http://localhost:4000/api/announcement", {month, leaves}, config);
+    const { data } = await axios.post(
+      "http://localhost:4000/api/attendence",
+      { month, leaves },
+      config
+    );
 
     dispatch({
       type: CREATE_ATTENDENCE_SUCCESS,
@@ -46,46 +50,44 @@ export const createAttendence = (month, leaves) => async(dispatch) => {
     }
 }
 
-export const listAttendence = () => async(dispatch) =>{
-    try {
-        
-        if(localStorage.token){
-            setAuthToken(localStorage.token)
-        }
-
-        dispatch({
-            type: ATTENDENCE_LIST_REQUEST
-        })
-        
-        const config = {
-            headers:{
-                "Content-Type": "application/json",
-                "auth-token": localStorage.getItem("authToken")
-            }
-        }
-
-        const { data } = await axios.post(
-          "http://localhost:4000/api/announcement",
-          config
-        );
-
-        dispatch({
-          type: ATTENDENCE_LIST_SUCCESS,
-          payload: data.results.data,
-        });
-
-         if (localStorage.token) {
-           setAuthToken(localStorage.token);
-         }
-         localStorage.setItem("attendences", JSON.stringify(data.results.data));
-        
-    } catch (error) {
-          dispatch({
-            type: ATTENDENCE_LIST_FAIL,
-            payload:
-              error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message,
-          });
+export const listAttendence = () => async (dispatch) => {
+  try {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
     }
-}
+
+    dispatch({ type: ATTENDENCE_LIST_REQUEST });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    };
+
+    const { data } = await axios.get(
+      "http://localhost:4000/api/attendence",
+      config
+    );
+
+    if (data.results) {
+      dispatch({
+        type: ATTENDENCE_LIST_SUCCESS,
+        payload: data.results.data,
+      });
+    }
+
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    localStorage.setItem("announcements", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: ATTENDENCE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
