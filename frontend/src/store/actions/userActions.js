@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -9,14 +9,13 @@ import {
   USER_REGISTER_SUCCESS,
 } from "../../store/constants/userConstants";
 
-import setAuthToken  from "../../utils/setAuthToken";
-
+import setAuthToken from "../../utils/setAuthToken";
 
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
-    })
+    });
 
     const config = {
       headers: {
@@ -34,10 +33,10 @@ export const login = (email, password) => async (dispatch) => {
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
-    })
-    
-    localStorage.setItem('userInfo', JSON.stringify(data))
-    const token = data.results.data
+    });
+
+    localStorage.setItem("userInfo", JSON.stringify(data));
+    const token = data.results.data;
     localStorage.setItem("authToken", token);
     setAuthToken(token);
   } catch (error) {
@@ -49,18 +48,27 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
-}
+};
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
+  localStorage.removeItem("userInfo");
   localStorage.removeItem("authToken");
   localStorage.removeItem("organization");
   localStorage.removeItem("organizations");
-  
-  dispatch({ type: USER_LOGOUT })
-  document.location.href = '/login'
-}
+  localStorage.removeItem("employee");
+  localStorage.removeItem("employees");
+  localStorage.removeItem("payroll");
+  localStorage.removeItem("payrolls");
+  localStorage.removeItem("announcements");
+  localStorage.removeItem("announcement");
+  localStorage.removeItem("attendence");
+  localStorage.removeItem("attendences");
+  localStorage.removeItem("cost");
+  localStorage.removeItem("costs");
 
+  dispatch({ type: USER_LOGOUT });
+  document.location.href = "/login";
+};
 
 export const register = (username, email, password) => async (dispatch) => {
   try {
@@ -76,8 +84,8 @@ export const register = (username, email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/user/signup", 
-       { username, email, password }, 
+      "http://localhost:4000/api/user/signup",
+      { username, email, password },
       config
     );
 
@@ -92,9 +100,9 @@ export const register = (username, email, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userInfo", JSON.stringify(data));
-     const token = data.results.data;
-     localStorage.setItem("authToken", token);
-     setAuthToken(token);
+    const token = data.results.data;
+    localStorage.setItem("authToken", token);
+    setAuthToken(token);
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
@@ -105,4 +113,3 @@ export const register = (username, email, password) => async (dispatch) => {
     });
   }
 };
-
