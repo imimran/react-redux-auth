@@ -24,7 +24,6 @@ const CreateAttendenceScreen = ({ location, history }) => {
     <FormContainer>
       <h1>Create Your Attendence</h1>
       {error && <Message variant="danger">{error}</Message>}
-      {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="month">
           <Form.Label> Attendence</Form.Label>
