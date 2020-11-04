@@ -44,7 +44,7 @@ export const createCost = (staffSalary, officeRent, utilityBill) => async (
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("cost", JSON.stringify(data));
+    localStorage.setItem("cost", JSON.stringify(data.results.data));
 
   } catch (error) {
     dispatch({

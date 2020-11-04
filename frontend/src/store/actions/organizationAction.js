@@ -37,13 +37,13 @@ export const createOrganization = (name, email, phone, address) => async (
  
     dispatch({
       type: CREATE_ORGANIZATION_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("organization", JSON.stringify(data));
+    localStorage.setItem("organization", JSON.stringify(data.results.data));
   } catch (error) {
     dispatch({
       type: CREATE_ORGANIZATION_FAIL,

@@ -10,9 +10,7 @@ import {
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createLeave = (leaveForDays) => async (
-  dispatch
-) => {
+export const createLeave = (leaveForDays) => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -37,14 +35,14 @@ export const createLeave = (leaveForDays) => async (
 
     dispatch({
       type: CREATE_LEAVES_SUCCESS,
-      payload: data.results.data,
+      payload: data,
     });
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("leave", JSON.stringify(data.results.data));
+    localStorage.setItem("leave", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: CREATE_LEAVES_FAIL,
@@ -56,7 +54,7 @@ export const createLeave = (leaveForDays) => async (
   }
 };
 
-export const listCost = () => async (dispatch) => {
+export const listLeave = () => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);

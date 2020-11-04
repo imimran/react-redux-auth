@@ -37,13 +37,13 @@ export const createEmployee = (name, email, designation, department) => async (
 
     dispatch({
       type: CREATE_EMPLOYEE_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("employee", JSON.stringify(data));
+    localStorage.setItem("employee", JSON.stringify(data.results.data));
   } catch (error) {
     dispatch({
       type: CREATE_EMPLOYEE_FAIL,

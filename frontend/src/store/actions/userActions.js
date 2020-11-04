@@ -91,15 +91,15 @@ export const register = (username, email, password) => async (dispatch) => {
 
     dispatch({
       type: USER_REGISTER_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data));
+    localStorage.setItem("userInfo", JSON.stringify(data.results.data));
     const token = data.results.data;
     localStorage.setItem("authToken", token);
     setAuthToken(token);

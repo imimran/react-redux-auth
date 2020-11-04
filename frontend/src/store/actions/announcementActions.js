@@ -35,14 +35,14 @@ export const createAnnouncement = (message) => async (dispatch) => {
 
     dispatch({
       type: CREATE_ANNOUNCEMENT_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("announcement", JSON.stringify(data));
+    localStorage.setItem("announcement", JSON.stringify(data.results.data));
 
     
   } catch (error) {

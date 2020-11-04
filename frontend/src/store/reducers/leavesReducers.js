@@ -41,7 +41,7 @@ export const leaveListReducer = (state = initialstate, action) => {
     case LEAVES_LIST_SUCCESS:
       return {
         loading: false,
-        leave: action.payload,
+        leaves: action.payload,
       };
     case LEAVES_LIST_FAIL:
       return {

@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { listPayroll } from "../store/actions/payrollActions";
+import { listLeave } from "../store/actions/leavesActions";
 
-const PayrollListScreen = () => {
+const LeaveListScreen = () => {
   const dispatch = useDispatch();
 
-  const listOfPayroll = useSelector((state) => state.listOfPayroll);
-  const { loading, error, payrolls } = listOfPayroll;
+  const listOfLeave = useSelector((state) => state.listOfLeave);
+  const { loading, error, leaves } = listOfLeave;
 
   useEffect(() => {
-    dispatch(listPayroll());
+    dispatch(listLeave());
   }, [dispatch]);
   return (
     <>
@@ -18,17 +18,17 @@ const PayrollListScreen = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Salary</th>
+            <th>Leave Requeat</th>
           </tr>
         </thead>
-        {payrolls && (
+        {leaves && (
           <tbody>
-            {payrolls.length > 0 ? (
-              payrolls.map((payroll) => (
-                <tr key={payroll.id}>
-                  <td>{payroll.id}</td>
+            {leaves.length > 0 ? (
+              leaves.map((leave) => (
+                <tr key={leave.id}>
+                  <td>{leave.id}</td>
 
-                  <td>{payroll.salary}</td>
+                  <td>{leave.leaveForDays}</td>
                 </tr>
               ))
             ) : (
@@ -43,4 +43,4 @@ const PayrollListScreen = () => {
   );
 };
 
-export default PayrollListScreen;
+export default LeaveListScreen;

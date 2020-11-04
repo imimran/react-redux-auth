@@ -11,7 +11,6 @@ const CreateEmployeeScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
- 
 
   const dispatch = useDispatch();
 

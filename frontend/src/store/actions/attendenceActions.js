@@ -36,14 +36,14 @@ export const createAttendence = (month, leaves) => async (dispatch) => {
 
     dispatch({
       type: CREATE_ATTENDENCE_SUCCESS,
-      payload: data,
+      payload: data.results.data,
     });
 
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
 
-    localStorage.setItem("attendence", JSON.stringify(data));
+    localStorage.setItem("attendence", JSON.stringify(data.results.data));
   } catch (error) {
     dispatch({
       type: CREATE_ATTENDENCE_FAIL,
