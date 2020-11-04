@@ -11,7 +11,7 @@ const OrganizationListScreen = () => {
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization)
   const { loading, error, organizations  } = listOfOrganization
-  console.log(organizations);
+ 
 
   useEffect(() =>{
     dispatch(listOrganization())
@@ -34,6 +34,7 @@ const OrganizationListScreen = () => {
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
+            <th>User ID</th>
           </tr>
         </thead>
         {organizations && (
@@ -45,6 +46,7 @@ const OrganizationListScreen = () => {
                   <td>{organization.name}</td>
                   <td>{organization.email}</td>
                   <td>{organization.phone}</td>
+                  <td>{organization.address}</td>
                   <td>{organization.address}</td>
                 </tr>
               ))
