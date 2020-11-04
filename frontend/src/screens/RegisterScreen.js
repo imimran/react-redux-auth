@@ -20,7 +20,7 @@ const RegisterScreen = ({ location, history }) => {
 
   const redirect = location.search
     ? location.search.split("=")[1]
-    : "/organization/create";
+    : "/";
 
   useEffect(() => {
     if (userInfo) {
