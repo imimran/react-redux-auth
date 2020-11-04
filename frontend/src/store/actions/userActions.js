@@ -65,6 +65,8 @@ export const logout = () => (dispatch) => {
   localStorage.removeItem("attendences");
   localStorage.removeItem("cost");
   localStorage.removeItem("costs");
+  localStorage.removeItem("leave");
+  localStorage.removeItem("leaves");
 
   dispatch({ type: USER_LOGOUT });
   document.location.href = "/login";
@@ -99,7 +101,7 @@ export const register = (username, email, password) => async (dispatch) => {
       payload: data.results.data,
     });
 
-    localStorage.setItem("userInfo", JSON.stringify(data.results.data));
+    localStorage.setItem("userInfo", JSON.stringify(data));
     const token = data.results.data;
     localStorage.setItem("authToken", token);
     setAuthToken(token);
