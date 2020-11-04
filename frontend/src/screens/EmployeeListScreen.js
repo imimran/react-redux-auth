@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listEmployee } from "../store/actions/employeeActions";
+import {Link} from 'react-router-dom'
 
 const EmployeeListScreen = () => {
     
@@ -16,6 +17,13 @@ const EmployeeListScreen = () => {
   }, [dispatch]);
     return (
       <>
+        <Link
+          to="/employee/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add Employee
+        </Link>
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import {Link} from 'react-router-dom'
 import { listLeave } from "../store/actions/leavesActions";
 
 const LeaveListScreen = () => {
@@ -14,6 +15,13 @@ const LeaveListScreen = () => {
   }, [dispatch]);
   return (
     <>
+      <Link
+        to="/leave/create"
+        className="btn btn-primary"
+        style={{ marginBottom: 20 }}
+      >
+        Add Leave Request
+      </Link>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

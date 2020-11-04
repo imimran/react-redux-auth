@@ -30,5 +30,23 @@ export const SidebarData = [
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text",
   },
+  {
+    title: "Payroll",
+    path: "/payrolls",
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
+  {
+    title: "Attendence",
+    path: "/attendences",
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
 
+  {
+    title: "leaves",
+    path: "/leaves",
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
 ];

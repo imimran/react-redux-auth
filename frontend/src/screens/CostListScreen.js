@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listCost } from "../store/actions/costActions";
+import {Link} from 'react-router-dom'
 
 const CostListScreen = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,13 @@ const CostListScreen = () => {
   }, [dispatch]);
   return (
     <>
+      <Link
+        to="/cost/create"
+        className="btn btn-primary"
+        style={{ marginBottom: 20 }}
+      >
+        Add Cost
+      </Link>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

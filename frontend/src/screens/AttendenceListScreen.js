@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listAttendence } from "../store/actions/attendenceActions";
+import {Link} from 'react-router-dom'
 
 const AttendenceListScreen = () => {
 
@@ -16,6 +17,13 @@ useEffect(() =>{
 
   return (
     <>
+      <Link
+        to="/attendence/create"
+        className="btn btn-primary"
+        style={{ marginBottom: 20 }}
+      >
+        Add attendence
+      </Link>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

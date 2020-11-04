@@ -1,5 +1,6 @@
 import React, {  useEffect } from 'react'
 import { Table } from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { listOrganization } from '../store/actions/organizationAction'
 
@@ -18,6 +19,13 @@ const OrganizationListScreen = () => {
 
   return (
     <>
+      <Link
+        to="/organization/create"
+        className="btn btn-primary"
+        style={{ marginBottom: 20 }}
+      >
+        Add Organization
+      </Link>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
