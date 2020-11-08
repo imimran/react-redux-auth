@@ -9,7 +9,7 @@ const HomeScreen = () => {
 
   return (
     <>
-     <h1>Hi</h1>
+     <h3>Welcome to Employee Management System</h3>
   
     </>
   )

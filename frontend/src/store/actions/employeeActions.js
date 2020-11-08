@@ -10,9 +10,13 @@ import {
 
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createEmployee = (name, email, designation, department) => async (
-  dispatch
-) => {
+export const createEmployee = (
+  name,
+  email,
+  designation,
+  department,
+  organizationId
+) => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -31,7 +35,7 @@ export const createEmployee = (name, email, designation, department) => async (
 
     const { data } = await axios.post(
       "http://localhost:4000/api/employee",
-      { name, email, designation, department },
+      { name, email, designation, department, organizationId },
       config
     );
 

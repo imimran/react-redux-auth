@@ -5,28 +5,43 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { createEmployee } from "../store/actions/employeeActions";
 import Message from "../components/Message";
+import { listOrganization } from "../store/actions/organizationAction";
 
 const CreateEmployeeScreen = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
+  const [organizationId, setOrganizationId] = useState("");
+  
 
   const dispatch = useDispatch();
 
   const addEmployee = useSelector((state) => state.addEmployee);
   const { loading, error, employee } = addEmployee;
 
+
+  const listOfOrganization = useSelector((state) => state.listOfOrganization);
+  const { organizations } = listOfOrganization;
+
+  console.log("organizations", organizations);
+
+  useEffect(() => {
+    dispatch(listOrganization());
+  }, [dispatch]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createEmployee(name, email, designation, department));
+    dispatch(createEmployee(name, email, designation, department, organizationId));
+  };
+  const handleOrganizationChange = (e) => {
+    setOrganizationId(e);
   };
 
   return (
     <FormContainer>
       <h1>Create Your Employee</h1>
       {error && <Message variant="danger">{error}</Message>}
-      {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label> Employee Name</Form.Label>
@@ -58,15 +73,31 @@ const CreateEmployeeScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="password">
+        <Form.Group controlId="department">
           <Form.Label>Department</Form.Label>
           <Form.Control
-            type="department"
+            type="text"
             placeholder="Enter department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
+        {organizations && organizations.length > 0 && (
+          <Form.Group controlId="organizationId">
+            <Form.Label> Select Organization</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={(e) => handleOrganizationChange(e.target.value)}
+            >
+              {organizations.map((organization, index) => (
+                <option value={organization.id} key={index}>
+                  {organization.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        )}
 
         <Button type="submit" variant="primary">
           Create Organization

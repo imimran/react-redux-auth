@@ -34,7 +34,7 @@ const OrganizationListScreen = () => {
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
-            <th>User ID</th>
+           
           </tr>
         </thead>
         {organizations && (
@@ -47,12 +47,12 @@ const OrganizationListScreen = () => {
                   <td>{organization.email}</td>
                   <td>{organization.phone}</td>
                   <td>{organization.address}</td>
-                  <td>{organization.address}</td>
+                 
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={6}>No Data Found</td>
+                <td colSpan={5}>No Data Found</td>
               </tr>
             )}
           </tbody>
