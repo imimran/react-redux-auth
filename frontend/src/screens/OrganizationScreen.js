@@ -17,6 +17,13 @@ const OrganizationScreen = ({ location, history }) => {
   const addOrganization = useSelector((state) => state.addOrganization)
   const { loading, error, organization } = addOrganization
 
+    const redirect = location.search ? location.search.split("=")[1] : "/organizations";
+
+      useEffect(() => {
+        if (organization) {
+          history.push(redirect);
+        }
+      }, [history, organization, redirect]);
 
 
   const submitHandler = (e) => {
