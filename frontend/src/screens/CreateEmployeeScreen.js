@@ -41,7 +41,9 @@ const CreateEmployeeScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <h1>Create Your Employee</h1>
+     
       {error && <Message variant="danger">{error}</Message>}
+      
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label> Employee Name</Form.Label>

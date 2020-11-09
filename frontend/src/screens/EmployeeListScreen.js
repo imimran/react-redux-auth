@@ -21,7 +21,7 @@ const EmployeeListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      <Table striped bordered hover variant="dark">
+      {/* <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th>#</th>
@@ -54,7 +54,7 @@ const EmployeeListScreen = () => {
                       className="btn btn-primary"
                       style={{ marginBottom: 20 }}
                     >
-                       Employee List
+                      Employee List
                     </Link>
                   </td>
                 </tr>
@@ -66,15 +66,44 @@ const EmployeeListScreen = () => {
             )}
           </tbody>
         )}
-      </Table>
-      {/* <Link
+      </Table> */}
+      <Link
         to="/employee/create"
         className="btn btn-primary"
         style={{ marginBottom: 20 }}
       >
         Add Employee
-      </Link> */}
-      
+      </Link>
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Employee Name</th>
+            <th>Email</th>
+            <th>Designation</th>
+            <th>Department</th>
+          </tr>
+        </thead>
+        {employees && (
+          <tbody>
+            {employees.length > 0 ? (
+              employees.map((employee) => (
+                <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.name}</td>
+                  <td>{employee.email}</td>
+                  <td>{employee.designation}</td>
+                  <td>{employee.department}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5}>No data found</td>
+              </tr>
+            )}
+          </tbody>
+        )}
+      </Table>
     </>
   );
 };

@@ -21,7 +21,6 @@ import CreateCostScreen from './screens/CreateCostScreen'
 import CostListScreen from './screens/CostListScreen'
 import CreateLeavesScreen from './screens/CreateLeavesScreen'
 import LeaveListScreen from './screens/LeaveListScreen'
-import ListOfEmployeeScreen from './screens/ListOfEmployeeScreen'
 
 
 
@@ -67,15 +66,8 @@ const App = () => {
             component={CreateEmployeeScreen}
           />
           <PrivateRoute path="/employees" component={EmployeeListScreen} />
-          <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} />
-          {/* <Route
-            path="/organization/create"
-            render={() => {
-              if (!token) return <Redirect to="/login" />;
-              return <OrganizationScreen />;
-            }}
-          /> */}
-
+          {/* <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} /> */}
+    
           <PrivateRoute
             path="/organization/create"
             component={OrganizationScreen}

@@ -10,7 +10,7 @@ import {
 
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createAnnouncement = (message) => async (dispatch) => {
+export const createAnnouncement = (message, organizationId) => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -29,7 +29,7 @@ export const createAnnouncement = (message) => async (dispatch) => {
 
     const { data } = await axios.post(
       "http://localhost:4000/api/announcement",
-      { message },
+      { message, organizationId },
       config
     );
 
@@ -43,8 +43,6 @@ export const createAnnouncement = (message) => async (dispatch) => {
     }
 
     localStorage.setItem("announcement", JSON.stringify(data.results.data));
-
-    
   } catch (error) {
     dispatch({
       type: CREATE_ANNOUNCEMENT_FAIL,

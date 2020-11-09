@@ -5,20 +5,33 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { createAnnouncement } from "../store/actions/announcementActions";
 import Message from "../components/Message";
+import { listOrganization } from "../store/actions/organizationAction";
+
 
 const CreateAnouncementScreen = ({ location, history }) => {
   const [message, setMessage] = useState("");
-
+  const [organizationId, setOrganizationId] = useState("");
 
   const dispatch = useDispatch();
 
   const addAnnouncement = useSelector((state) => state.addAnnouncement);
   const { loading, error, announcement } = addAnnouncement;
 
+   const listOfOrganization = useSelector((state) => state.listOfOrganization);
+   const { organizations } = listOfOrganization;
+
+   useEffect(()=>{
+     dispatch(listOrganization())
+   }, [dispatch])
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createAnnouncement(message));
+    dispatch(createAnnouncement(message, organizationId));
   };
+
+    const handleOrganizationChange = (e) => {
+      setOrganizationId(e);
+    };
 
   return (
     <FormContainer>
@@ -35,8 +48,21 @@ const CreateAnouncementScreen = ({ location, history }) => {
             onChange={(e) => setMessage(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
-
+        {organizations && organizations.length > 0 && (
+          <Form.Group controlId="organizationId">
+            <Form.Label> Select Organization</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={(e) => handleOrganizationChange(e.target.value)}
+            >
+              {organizations.map((organization, index) => (
+                <option value={organization.id} key={index}>
+                  {organization.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        )}
         <Button type="submit" variant="primary">
           Create Anouncement
         </Button>
