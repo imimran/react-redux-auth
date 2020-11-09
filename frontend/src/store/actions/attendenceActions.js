@@ -11,7 +11,9 @@ import {
 import setAuthToken from "../../utils/setAuthToken";
 
 
-export const createAttendence = (month, leaves) => async (dispatch) => {
+export const createAttendence = (month, leaves, employeeId, organizationId) => async (
+  dispatch
+) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -30,7 +32,7 @@ export const createAttendence = (month, leaves) => async (dispatch) => {
 
     const { data } = await axios.post(
       "http://localhost:4000/api/attendence",
-      { month, leaves },
+      { month, leaves, employeeId, organizationId },
       config
     );
 

@@ -56,7 +56,7 @@ const CreatePayrollScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        {employees && (
+        {employees &&  (
           <Form.Group controlId="employeeId">
             <Form.Label> Select Employee</Form.Label>
             <Form.Control

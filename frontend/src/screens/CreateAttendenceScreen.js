@@ -5,19 +5,42 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { createAttendence } from "../store/actions/attendenceActions";
 import Message from "../components/Message";
+import { listOrganization } from "../store/actions/organizationAction";
+import { listEmployee } from "../store/actions/employeeActions";
 
 const CreateAttendenceScreen = ({ location, history }) => {
   const [month, setMonth] = useState("");
-   const [leaves, setLeaves] = useState("");
+  const [leaves, setLeaves] = useState("");
+  const [organizationId, setOrganizationId] = useState("");
+  const [employeeId, setEmployeeId] = useState("");
 
   const dispatch = useDispatch();
 
   const addAttendence = useSelector((state) => state.addAttendence);
   const { loading, error, attendence } = addAttendence;
 
+  const listOfOrganization = useSelector((state) => state.listOfOrganization);
+  const { organizations } = listOfOrganization;
+
+  const listOfEmployee = useSelector((state) => state.listOfEmployee);
+  const { employees } = listOfEmployee;
+
+  useEffect(() => {
+    dispatch(listOrganization());
+    dispatch(listEmployee());
+  }, [dispatch]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createAttendence(month, leaves));
+    dispatch(createAttendence(month, leaves, employeeId, organizationId));
+  };
+
+  const handleOrganizationChange = (e) => {
+    setOrganizationId(e);
+  };
+
+  const handleEmployeeChange = (e) => {
+    setEmployeeId(e);
   };
 
   return (
@@ -44,6 +67,38 @@ const CreateAttendenceScreen = ({ location, history }) => {
             onChange={(e) => setLeaves(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
+        {employees && employees.length > 0 &&  (
+          <Form.Group controlId="employeeId">
+            <Form.Label> Select Employee</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={(e) => handleEmployeeChange(e.target.value)}
+            >
+              {employees.map((employee, index) => (
+                <option value={employee.id} key={index}>
+                  {employee.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        )}
+
+        {organizations && organizations.length > 0 && (
+          <Form.Group controlId="organizationId">
+            <Form.Label> Select Organization</Form.Label>
+            <Form.Control
+              as="select"
+              onChange={(e) => handleOrganizationChange(e.target.value)}
+            >
+              {organizations.map((organization, index) => (
+                <option value={organization.id} key={index}>
+                  {organization.name}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
+        )}
 
         <Button type="submit" variant="primary">
           Create Attendence
