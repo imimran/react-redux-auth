@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createPayroll = (salary) => async (
+export const createPayroll = (salary, organizationId, employeeId) => async (
   dispatch
 ) => {
   try {
@@ -31,7 +31,7 @@ export const createPayroll = (salary) => async (
 
     const { data } = await axios.post(
       "http://localhost:4000/api/payroll",
-      {  salary },
+      { salary, organizationId, employeeId },
       config
     );
 
