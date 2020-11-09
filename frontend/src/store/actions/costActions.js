@@ -10,9 +10,12 @@ import {
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createCost = (staffSalary, officeRent, utilityBill) => async (
-  dispatch
-) => {
+export const createCost = (
+  staffSalary,
+  officeRent,
+  utilityBill,
+  organizationId
+) => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -31,7 +34,7 @@ export const createCost = (staffSalary, officeRent, utilityBill) => async (
 
     const { data } = await axios.post(
       "http://localhost:4000/api/cost",
-      { staffSalary, utilityBill, officeRent },
+      { staffSalary, utilityBill, officeRent, organizationId },
       config
     );
 
@@ -45,7 +48,6 @@ export const createCost = (staffSalary, officeRent, utilityBill) => async (
     }
 
     localStorage.setItem("cost", JSON.stringify(data.results.data));
-
   } catch (error) {
     dispatch({
       type: CREATE_COST_FAIL,

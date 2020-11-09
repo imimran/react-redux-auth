@@ -49,4 +49,10 @@ export const SidebarData = [
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text",
   },
+  {
+    title: "CostList",
+    path: "/costs",
+    icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
 ];
