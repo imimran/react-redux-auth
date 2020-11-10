@@ -29,6 +29,7 @@ const CostListScreen = () => {
             <th>Staf Salary</th>
             <th>Utility Bill</th>
             <th>Office Rent</th>
+            <th>Organization</th>
           </tr>
         </thead>
         {costs && (
@@ -40,6 +41,7 @@ const CostListScreen = () => {
                   <td>{cost.staffSalary}</td>
                   <td>{cost.utilityBill}</td>
                   <td>{cost.officeRent}</td>
+                  <td>{cost.organization.name}</td>
                 </tr>
               ))
             ) : (
