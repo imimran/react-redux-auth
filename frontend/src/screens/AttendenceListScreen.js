@@ -30,6 +30,8 @@ useEffect(() =>{
             <th>#</th>
             <th>Month</th>
             <th>Days of Leave</th>
+            <th>Organization</th>
+            <th>Employee Id</th>
           </tr>
         </thead>
         {attendences && (
@@ -40,6 +42,8 @@ useEffect(() =>{
                   <td>{attendence.id}</td>
                   <td>{attendence.month}</td>
                   <td>{attendence.leaves}</td>
+                  <td>{attendence.organization.name}</td>
+                  <td>{attendence.employeeId}</td>
                 </tr>
               ))
             ) : (

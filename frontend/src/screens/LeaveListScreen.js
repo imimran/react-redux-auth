@@ -27,6 +27,8 @@ const LeaveListScreen = () => {
           <tr>
             <th>#</th>
             <th>Leave Requeat</th>
+            <th>Organization</th>
+            <th>Employee ID</th>
           </tr>
         </thead>
         {leaves && (
@@ -37,6 +39,8 @@ const LeaveListScreen = () => {
                   <td>{leave.id}</td>
 
                   <td>{leave.leaveForDays}</td>
+                  <td>{leave.organization.name}</td>
+                  <td>{leave.employeeId}</td>
                 </tr>
               ))
             ) : (
