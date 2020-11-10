@@ -11,8 +11,6 @@ const PayrollListScreen = () => {
   const listOfPayroll = useSelector((state) => state.listOfPayroll);
   const { loading, error, payrolls } = listOfPayroll;
 
-  
-
 
   useEffect(() => {
     dispatch(listPayroll());
