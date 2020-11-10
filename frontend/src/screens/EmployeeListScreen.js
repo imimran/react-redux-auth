@@ -21,52 +21,6 @@ const EmployeeListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      {/* <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Organization Name</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        {organizations && (
-          <tbody>
-            {organizations.length > 0 ? (
-              organizations.map((organization) => (
-                <tr key={organization.id}>
-                  <td>{organization.id}</td>
-                  <td>{organization.name}</td>
-                  <td>
-                    {" "}
-                    <Link
-                      to="/employee/create"
-                      className="btn btn-primary"
-                      style={{ marginBottom: 20 }}
-                    >
-                      Add Employee
-                    </Link>
-                  </td>
-                  <td>
-                    {" "}
-                    <Link
-                      to="/employee-list"
-                      className="btn btn-primary"
-                      style={{ marginBottom: 20 }}
-                    >
-                      Employee List
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={5}>No Data Found</td>
-              </tr>
-            )}
-          </tbody>
-        )}
-      </Table> */}
       <Link
         to="/employee/create"
         className="btn btn-primary"
@@ -82,6 +36,7 @@ const EmployeeListScreen = () => {
             <th>Email</th>
             <th>Designation</th>
             <th>Department</th>
+            <th>Organization</th>
           </tr>
         </thead>
         {employees && (
@@ -94,6 +49,7 @@ const EmployeeListScreen = () => {
                   <td>{employee.email}</td>
                   <td>{employee.designation}</td>
                   <td>{employee.department}</td>
+                  <td>{employee.organization.name}</td>
                 </tr>
               ))
             ) : (

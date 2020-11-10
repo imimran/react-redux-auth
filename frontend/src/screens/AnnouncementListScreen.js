@@ -28,6 +28,7 @@ const AnnouncementListScreen = () => {
           <tr>
             <th>#</th>
             <th>Announcement</th>
+            <th>Organization Name</th>
           </tr>
         </thead>
         {announcements && (
@@ -37,6 +38,7 @@ const AnnouncementListScreen = () => {
                 <tr key={announcement.id}>
                   <td>{announcement.id}</td>
                   <td>{announcement.message}</td>
+                  <td>{announcement.organization.name}</td>
                 </tr>
               ))
             ) : (
