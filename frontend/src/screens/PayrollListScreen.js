@@ -4,14 +4,19 @@ import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { listPayroll } from "../store/actions/payrollActions";
 
+
 const PayrollListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfPayroll = useSelector((state) => state.listOfPayroll);
   const { loading, error, payrolls } = listOfPayroll;
 
+  
+
+
   useEffect(() => {
     dispatch(listPayroll());
+
   }, [dispatch]);
   return (
     <>
@@ -27,6 +32,8 @@ const PayrollListScreen = () => {
           <tr>
             <th>#</th>
             <th>Salary</th>
+            <th>Organization</th>
+            <th>Employee ID</th>
           </tr>
         </thead>
         {payrolls && (
@@ -37,6 +44,8 @@ const PayrollListScreen = () => {
                   <td>{payroll.id}</td>
 
                   <td>{payroll.salary}</td>
+                  <td>{payroll.organization.name}</td>
+                  <td>{payroll.employeeId}</td>
                 </tr>
               ))
             ) : (
