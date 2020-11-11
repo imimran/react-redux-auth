@@ -6,6 +6,15 @@ import {
   EMPLOYEE_LIST_REQUEST,
   EMPLOYEE_LIST_SUCCESS,
   EMPLOYEE_LIST_FAIL,
+  EMPLOYEE_UPDATE_REQUEST,
+  EMPLOYEE_UPDATE_SUCCESS,
+  EMPLOYEE_UPDATE_FAIL,
+  EMPLOYEE_DELETE_REQUEST,
+  EMPLOYEE_DELETE_SUCCESS,
+  EMPLOYEE_DELETE_FAIL,
+  EMPLOYEE_DETAILS_REQUEST,
+  EMPLOYEE_DETAILS_SUCCESS,
+  EMPLOYEE_DETAILS_FAIL,
 } from "../constants/employeeConstants";
 
 import setAuthToken from "../../utils/setAuthToken";
@@ -59,6 +68,49 @@ export const createEmployee = (
   }
 };
 
+export const employeeDetails = (id) => async (dispatch) => {
+  try {
+
+       if (localStorage.token) {
+         setAuthToken(localStorage.token);
+       }
+    dispatch({ type: EMPLOYEE_DETAILS_REQUEST });
+
+       const config = {
+         headers: {
+           "Content-Type": "application/json",
+           "auth-token": localStorage.getItem("authToken"),
+         },
+       };
+
+    const { data } = await axios.get(
+      `http://localhost:4000/api/employee/${id}`, config
+    );
+
+    dispatch({
+      type: EMPLOYEE_DETAILS_SUCCESS,
+      payload: data.results.data,
+       
+    });
+
+    console.log(data.results.data);
+
+     if (localStorage.token) {
+       setAuthToken(localStorage.token);
+     }
+     localStorage.setItem("employeeDetails", JSON.stringify(data));
+
+  } catch (error) {
+    dispatch({
+      type: EMPLOYEE_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const listEmployee = () => async (dispatch) => {
   try {
     if (localStorage.token) {
@@ -93,6 +145,80 @@ export const listEmployee = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: EMPLOYEE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deleteEmployee = (id) => async (dispatch) => {
+  try {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    dispatch({
+      type: EMPLOYEE_DELETE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    };
+
+    await axios.delete(
+      `http://localhost:4000/api/employee/${id}`,
+      config
+    );
+
+    dispatch({
+      type: EMPLOYEE_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: EMPLOYEE_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const editEmployee = (employee) => async (dispatch) => {
+  try {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    dispatch({
+      type: EMPLOYEE_UPDATE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    };
+
+    const {data} = await axios.put(`http://localhost:4000/api/employee/${employee.id}`, config);
+
+    dispatch({
+      type: EMPLOYEE_UPDATE_SUCCESS,
+      payload: data
+    });
+
+     if (localStorage.token) {
+       setAuthToken(localStorage.token);
+     }
+     localStorage.setItem("updateEmployee", JSON.stringify(data));
+
+  } catch (error) {
+    dispatch({
+      type: EMPLOYEE_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

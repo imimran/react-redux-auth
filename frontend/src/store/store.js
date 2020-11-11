@@ -10,7 +10,7 @@ import {
   createOrganizationReducer,
   organizationListReducer,
 } from "../store/reducers/organizationReducer";
-import {createEmployeeReducer, employeeListReducer} from '../store/reducers/employeeReducers'
+import {createEmployeeReducer, employeeListReducer,employeeDetailsReducer, employeeEditReducer, employeeDeleteReducer} from '../store/reducers/employeeReducers'
 import {
   createAnnouncementReducer,
   announcementListReducer,
@@ -26,6 +26,9 @@ const reducer = combineReducers({
   addOrganization: createOrganizationReducer,
   listOfOrganization: organizationListReducer,
   addEmployee: createEmployeeReducer,
+  detailsEmployee: employeeDetailsReducer,
+  updateEmployee: employeeEditReducer,
+  removeEmployee: employeeDeleteReducer,
   listOfEmployee: employeeListReducer,
   addAnnouncement: createAnnouncementReducer,
   listOfAnnouncement: announcementListReducer,

@@ -21,6 +21,8 @@ import CreateCostScreen from './screens/CreateCostScreen'
 import CostListScreen from './screens/CostListScreen'
 import CreateLeavesScreen from './screens/CreateLeavesScreen'
 import LeaveListScreen from './screens/LeaveListScreen'
+import UpdateEmployeeScreen from './screens/UpdateEmployeeScreen'
+import EmployeeDetailsScreen from './screens/EmployeeDetailsScreen'
 
 
 
@@ -65,9 +67,20 @@ const App = () => {
             path="/employee/create"
             component={CreateEmployeeScreen}
           />
+
+          <PrivateRoute
+            path="/employee/edit/:id"
+            component={UpdateEmployeeScreen}
+          />
+
+          <PrivateRoute
+            path="/employee/:id"
+            component={EmployeeDetailsScreen}
+            exact
+          />
           <PrivateRoute path="/employees" component={EmployeeListScreen} />
           {/* <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} /> */}
-    
+
           <PrivateRoute
             path="/organization/create"
             component={OrganizationScreen}
