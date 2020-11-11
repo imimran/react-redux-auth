@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
-import { editEmployee } from "../store/actions/employeeActions";
+import { editEmployee, employeeDetails } from "../store/actions/employeeActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
 import { EMPLOYEE_UPDATE_RESET } from '../store/constants/employeeConstants'
 
 const UpdateEmployeeScreen = ({ match, history }) => {
-   const employeeId = match.params.id;
-  console.log(match.params.id);
+
+  const employeeId = match.params.id;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
@@ -21,7 +21,9 @@ const UpdateEmployeeScreen = ({ match, history }) => {
 
   const updateEmployee = useSelector((state) => state.updateEmployee);
   const { success: successUpdate, error } = updateEmployee;
-
+ 
+   const detailsEmployee = useSelector((state) => state.detailsEmployee);
+   const {  employee } = detailsEmployee;
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
@@ -34,12 +36,20 @@ const UpdateEmployeeScreen = ({ match, history }) => {
       dispatch({ type: EMPLOYEE_UPDATE_RESET })
       history.push('/employees')
 
+      } else {
+      if (employee.id !== employeeId) {
+        dispatch(employeeDetails(employee.id))
+      } else {
+        setName(employee.name)
+        setEmail(employee.email)
+        setDesignation(employee.designation)
+        setDepartment(employee.department)
+        setOrganizationId(employee.organizationId)
+      }
      }
-    
-   
-  },[dispatch, history, successUpdate]
-  )
-   
+  
+  },[dispatch, history, employeeId, successUpdate])
+  
     const submitHandler = (e) => {
       e.preventDefault();
       dispatch(
@@ -57,7 +67,7 @@ const UpdateEmployeeScreen = ({ match, history }) => {
       <h1>Edit Employee</h1>
 
       {error && <Message variant="danger">{error}</Message>}
-
+         
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label> Employee Name</Form.Label>
