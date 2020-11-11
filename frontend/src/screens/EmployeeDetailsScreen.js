@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { employeeDetails } from "../store/actions/employeeActions";
+import { listOrganization } from "../store/actions/organizationAction";
 import { Link } from "react-router-dom";
 
 const EmployeeDetailsScreen = ({match}) => {
     
   const dispatch = useDispatch();
 
+    const listOfOrganization = useSelector((state) => state.listOfOrganization);
+    const { organizations } = listOfOrganization;
+
   const detailsEmployee = useSelector((state) => state.detailsEmployee);
-  const { loading, error, employee } = detailsEmployee;
+  const { employee } = detailsEmployee;
   
+  console.log(employee)
 
   useEffect(() => {
         
@@ -21,16 +26,21 @@ const EmployeeDetailsScreen = ({match}) => {
 
   return (
     <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>Employee details</Card.Title>
-  <Card.Text>Name {employee.name}</Card.Text>
-          <Card.Text>Email</Card.Text>
-          <Card.Text>Degination</Card.Text>
-          <Card.Text>Department</Card.Text>
-        </Card.Body>
-      </Card>
-      ;
+      <Container>
+        <Card style={{ width: "18rem" }}>
+          {employee && (
+            <Card.Body>
+              <Card.Title>Employee details</Card.Title>
+              <Card.Text>Name: {employee.name} </Card.Text>
+
+              <Card.Text>Email: {employee.email} </Card.Text>
+              <Card.Text>Degination: {employee.designation} </Card.Text>
+              <Card.Text>Department: {employee.department} </Card.Text>
+              <Card.Text>Organization ID: {employee.organizationId} </Card.Text>
+            </Card.Body>
+          )}
+        </Card>
+      </Container>
     </>
   );
 };
