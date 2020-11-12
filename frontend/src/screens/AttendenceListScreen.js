@@ -31,7 +31,7 @@ useEffect(() =>{
             <th>Month</th>
             <th>Days of Leave</th>
             <th>Organization</th>
-            <th>Employee Id</th>
+            <th>Employee </th>
           </tr>
         </thead>
         {attendences && (
@@ -43,7 +43,7 @@ useEffect(() =>{
                   <td>{attendence.month}</td>
                   <td>{attendence.leaves}</td>
                   <td>{attendence.organization.name}</td>
-                  <td>{attendence.employeeId}</td>
+                  <td>{attendence.employee.name}</td>
                 </tr>
               ))
             ) : (

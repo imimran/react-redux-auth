@@ -31,7 +31,7 @@ const PayrollListScreen = () => {
             <th>#</th>
             <th>Salary</th>
             <th>Organization</th>
-            <th>Employee ID</th>
+            <th>Employee</th>
           </tr>
         </thead>
         {payrolls && (
@@ -43,7 +43,7 @@ const PayrollListScreen = () => {
 
                   <td>{payroll.salary}</td>
                   <td>{payroll.organization.name}</td>
-                  <td>{payroll.employeeId}</td>
+                  <td>{payroll.employee.name}</td>
                 </tr>
               ))
             ) : (
