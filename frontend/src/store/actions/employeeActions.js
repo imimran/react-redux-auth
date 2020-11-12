@@ -204,12 +204,14 @@ export const editEmployee = (employee) => async (dispatch) => {
       },
     };
 
-    const {data} = await axios.put(`http://localhost:4000/api/employee/${employee.id}`, config);
+    const {data} = await axios.put(`http://localhost:4000/api/employee/${employee.id}`, employee, config);
 
     dispatch({
       type: EMPLOYEE_UPDATE_SUCCESS,
-      payload: data
+      payload: data.results.data,
     });
+
+    console.log(data.results.data);
 
      if (localStorage.token) {
        setAuthToken(localStorage.token);

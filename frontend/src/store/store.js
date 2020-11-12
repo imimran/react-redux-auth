@@ -42,6 +42,8 @@ const reducer = combineReducers({
   listOfLeave: leaveListReducer,
 });
 
+console.log(employeeDetailsReducer);
+
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;

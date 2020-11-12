@@ -2,15 +2,14 @@ import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { employeeDetails } from "../store/actions/employeeActions";
-import { listOrganization } from "../store/actions/organizationAction";
+
 import { Link } from "react-router-dom";
 
 const EmployeeDetailsScreen = ({match}) => {
     
   const dispatch = useDispatch();
 
-    const listOfOrganization = useSelector((state) => state.listOfOrganization);
-    const { organizations } = listOfOrganization;
+
 
   const detailsEmployee = useSelector((state) => state.detailsEmployee);
   const { employee } = detailsEmployee;
@@ -31,6 +30,7 @@ const EmployeeDetailsScreen = ({match}) => {
           {employee && (
             <Card.Body>
               <Card.Title>Employee details</Card.Title>
+              <Card.Text>ID: {employee.id} </Card.Text>
               <Card.Text>Name: {employee.name} </Card.Text>
 
               <Card.Text>Email: {employee.email} </Card.Text>

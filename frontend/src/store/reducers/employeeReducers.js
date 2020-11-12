@@ -51,7 +51,7 @@ export const employeeDetailsReducer = (state = initialState, action) => {
         loading: true,
       };
     case EMPLOYEE_DETAILS_SUCCESS:
-      return { ...state, employee: action.payload };
+      return { loading: false, employee: action.payload };
     case EMPLOYEE_DETAILS_FAIL:
       return {
         loading: false,

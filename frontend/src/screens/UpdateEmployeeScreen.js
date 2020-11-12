@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
-import { editEmployee, employeeDetails } from "../store/actions/employeeActions";
+import {
+  editEmployee,
+  employeeDetails,
+} from "../store/actions/employeeActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
-import { EMPLOYEE_UPDATE_RESET } from '../store/constants/employeeConstants'
+import { EMPLOYEE_UPDATE_RESET } from "../store/constants/employeeConstants";
 
 const UpdateEmployeeScreen = ({ match, history }) => {
-
   const employeeId = match.params.id;
+  console.log(match.params.id);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [designation, setDesignation] = useState("");
@@ -21,42 +24,50 @@ const UpdateEmployeeScreen = ({ match, history }) => {
 
   const updateEmployee = useSelector((state) => state.updateEmployee);
   const { success: successUpdate, error } = updateEmployee;
- 
-   const detailsEmployee = useSelector((state) => state.detailsEmployee);
-   const {  employee } = detailsEmployee;
 
+  const detailsEmployee = useSelector((state) => state.detailsEmployee);
+  const { employee } = detailsEmployee;
+  console.log(employee);
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
 
-
-
   useEffect(() => {
-     dispatch(listOrganization());
-     if (successUpdate) {
-      dispatch({ type: EMPLOYEE_UPDATE_RESET })
-      history.push('/employees')
+    dispatch(listOrganization());
+    //dispatch(employeeDetails(employeeId));
+    console.log(employeeId);
+    if (successUpdate) {
+      dispatch({ type: EMPLOYEE_UPDATE_RESET });
+      history.push("/employees");
 
-      } else {
+    
+    } else {
+      
       if (employee.id !== employeeId) {
-        dispatch(employeeDetails(employee.id))
+        dispatch(employeeDetails(employeeId));
+      
       } else {
-        setName(employee.name)
-        setEmail(employee.email)
-        setDesignation(employee.designation)
-        setDepartment(employee.department)
-        setOrganizationId(employee.organizationId)
+        setName(employee.name);
+        setEmail(employee.email);
+        setDesignation(employee.designation);
+        setDepartment(employee.department);
+        setOrganizationId(employee.organizationId);
       }
-     }
-  
-  },[dispatch, history, employeeId, successUpdate])
-  
-    const submitHandler = (e) => {
-      e.preventDefault();
-      dispatch(
-        editEmployee( {id: employeeId, name, email, designation, department, organizationId} )
-        );
-    };
+    }
+  }, [dispatch, successUpdate, employeeId]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      editEmployee({
+        id: employeeId,
+        name,
+        email,
+        designation,
+        department,
+        organizationId,
+      })
+    );
+  };
 
   const handleOrganizationChange = (e) => {
     setOrganizationId(e);
@@ -67,8 +78,9 @@ const UpdateEmployeeScreen = ({ match, history }) => {
       <h1>Edit Employee</h1>
 
       {error && <Message variant="danger">{error}</Message>}
-         
+     
       <Form onSubmit={submitHandler}>
+        
         <Form.Group controlId="name">
           <Form.Label> Employee Name</Form.Label>
           <Form.Control
@@ -108,7 +120,8 @@ const UpdateEmployeeScreen = ({ match, history }) => {
             onChange={(e) => setDepartment(e.target.value)}
           ></Form.Control>
         </Form.Group>
-
+     
+    
         {organizations && organizations.length > 0 && (
           <Form.Group controlId="organizationId">
             <Form.Label> Select Organization</Form.Label>

@@ -63,6 +63,11 @@ const EmployeeListScreen = () => {
                   <td>{employee.organization.name}</td>
 
                   <td>
+                    <LinkContainer to={`/employee/${employee.id}`}>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-user"></i>
+                      </Button>
+                    </LinkContainer>
                     <LinkContainer to={`/employee/edit/${employee.id}`}>
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
