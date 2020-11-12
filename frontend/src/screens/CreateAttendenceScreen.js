@@ -25,14 +25,14 @@ const CreateAttendenceScreen = ({ location, history }) => {
   const listOfEmployee = useSelector((state) => state.listOfEmployee);
   const { employees } = listOfEmployee;
 
-    const redirect = location.search
-      ? location.search.split("=")[1]
-      : "/attendences";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : "/attendences";
 
   useEffect(() => {
-      if (attendence) {
-        history.push(redirect);
-      }
+    if (attendence) {
+      history.push(redirect);
+    }
     dispatch(listOrganization());
     dispatch(listEmployee());
   }, [dispatch, history, redirect, attendence]);
@@ -65,6 +65,19 @@ const CreateAttendenceScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
+        {/* () => {
+  const [startDate, setStartDate] = useState(new Date());
+  return (
+    <DatePicker
+      selected={startDate}
+      onChange={date => setStartDate(date)}
+      dateFormat="MM/yyyy"
+      showMonthYearPicker
+      showFullMonthYearPicker
+      showTwoColumnMonthYearPicker
+    />
+  );
+}; */}
         <Form.Group controlId="leaves">
           <Form.Label> Leaves</Form.Label>
           <Form.Control
@@ -75,7 +88,7 @@ const CreateAttendenceScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        {employees && employees.length > 0 &&  (
+        {employees && employees.length > 0 && (
           <Form.Group controlId="employeeId">
             <Form.Label> Select Employee</Form.Label>
             <Form.Control
