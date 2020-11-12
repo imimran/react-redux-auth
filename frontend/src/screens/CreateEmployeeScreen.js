@@ -24,11 +24,14 @@ const CreateEmployeeScreen = ({ location, history }) => {
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
 
-  console.log("organizations", organizations);
+const redirect = location.search ? location.search.split("=")[1]: "/employees"
 
   useEffect(() => {
+    if(employee){
+      history.push(redirect)
+    }
     dispatch(listOrganization());
-  }, [dispatch]);
+  }, [dispatch, history, employee, redirect ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -102,7 +105,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
         )}
 
         <Button type="submit" variant="primary">
-          Create Organization
+          Create Emoloyee
         </Button>
       </Form>
     </FormContainer>

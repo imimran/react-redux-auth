@@ -20,9 +20,14 @@ const CreateAnouncementScreen = ({ location, history }) => {
    const listOfOrganization = useSelector((state) => state.listOfOrganization);
    const { organizations } = listOfOrganization;
 
+   const redirect = location.search ? location.search.split("=")[1]: "/announcements"
+
    useEffect(()=>{
+     if(announcement){
+       history.push(redirect)
+     }
      dispatch(listOrganization())
-   }, [dispatch])
+   }, [dispatch, history, redirect, announcement])
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -25,10 +25,17 @@ const CreateAttendenceScreen = ({ location, history }) => {
   const listOfEmployee = useSelector((state) => state.listOfEmployee);
   const { employees } = listOfEmployee;
 
+    const redirect = location.search
+      ? location.search.split("=")[1]
+      : "/attendences";
+
   useEffect(() => {
+      if (attendence) {
+        history.push(redirect);
+      }
     dispatch(listOrganization());
     dispatch(listEmployee());
-  }, [dispatch]);
+  }, [dispatch, history, redirect, attendence]);
 
   const submitHandler = (e) => {
     e.preventDefault();

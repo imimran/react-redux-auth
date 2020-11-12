@@ -87,13 +87,13 @@ export const employeeDetails = (id) => async (dispatch) => {
       `http://localhost:4000/api/employee/${id}`, config
     );
 
+
     dispatch({
       type: EMPLOYEE_DETAILS_SUCCESS,
       payload: data.results.data,
        
     });
 
-    console.log(data.results.data);
 
      if (localStorage.token) {
        setAuthToken(localStorage.token);

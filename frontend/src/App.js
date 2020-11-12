@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -23,6 +23,7 @@ import CreateLeavesScreen from './screens/CreateLeavesScreen'
 import LeaveListScreen from './screens/LeaveListScreen'
 import UpdateEmployeeScreen from './screens/UpdateEmployeeScreen'
 import EmployeeDetailsScreen from './screens/EmployeeDetailsScreen'
+import ErrorScreen from './screens/ErrorScreen';
 
 
 
@@ -33,63 +34,70 @@ const App = () => {
       <Header />
       <main className="py-3">
         <Container>
-          <Route path="/login" component={LoginScreen} />
-          <Route path="/register" component={RegisterScreen} />
-          <PrivateRoute
-            path="/announcements"
-            component={AnnouncementListScreen}
-          />
-          <PrivateRoute
-            path="/announcement/create"
-            component={CreateAnouncementScreen}
-          />
+          <Switch>
+            <Route path="/login" component={LoginScreen} />
+            <Route path="/register" component={RegisterScreen} />
+            <PrivateRoute
+              path="/announcements"
+              component={AnnouncementListScreen}
+            />
+            <PrivateRoute
+              path="/announcement/create"
+              component={CreateAnouncementScreen}
+            />
 
-          <PrivateRoute path="/leave/create" component={CreateLeavesScreen} />
+            <PrivateRoute path="/leave/create" component={CreateLeavesScreen} />
 
-          <PrivateRoute path="/leaves" component={LeaveListScreen} />
+            <PrivateRoute path="/leaves" component={LeaveListScreen} />
 
-          <PrivateRoute path="/cost/create" component={CreateCostScreen} />
-          <PrivateRoute path="/costs" component={CostListScreen} />
+            <PrivateRoute path="/cost/create" component={CreateCostScreen} />
+            <PrivateRoute path="/costs" component={CostListScreen} />
 
-          <PrivateRoute
-            path="/payroll/create"
-            component={CreatePayrollScreen}
-          />
+            <PrivateRoute
+              path="/payroll/create"
+              component={CreatePayrollScreen}
+            />
 
-          <PrivateRoute path="/payrolls" component={PayrollListScreen} />
+            <PrivateRoute path="/payrolls" component={PayrollListScreen} />
 
-          <PrivateRoute
-            path="/attendence/create"
-            component={CreateAttendenceScreen}
-          />
-          <PrivateRoute path="/attendences" component={AttendenceListScreen} />
-          <PrivateRoute
-            path="/employee/create"
-            component={CreateEmployeeScreen}
-          />
+            <PrivateRoute
+              path="/attendence/create"
+              component={CreateAttendenceScreen}
+            />
+            <PrivateRoute
+              path="/attendences"
+              component={AttendenceListScreen}
+            />
+            <PrivateRoute
+              path="/employee/create"
+              component={CreateEmployeeScreen}
+            />
 
-          <PrivateRoute
-            path="/employee/edit/:id"
-            component={UpdateEmployeeScreen}
-          />
+            <PrivateRoute
+              path="/employee/edit/:id"
+              component={UpdateEmployeeScreen}
+            />
 
-          <PrivateRoute
-            path="/employee/:id"
-            component={EmployeeDetailsScreen}
-            exact
-          />
-          <PrivateRoute path="/employees" component={EmployeeListScreen} />
-          {/* <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} /> */}
+            <PrivateRoute
+              path="/employee/:id"
+              component={EmployeeDetailsScreen}
+              exact
+            />
+            <PrivateRoute path="/employees" component={EmployeeListScreen} />
+            {/* <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} /> */}
 
-          <PrivateRoute
-            path="/organization/create"
-            component={OrganizationScreen}
-          />
-          <PrivateRoute
-            path="/organizations"
-            component={OrganizationListScreen}
-          />
-          <PrivateRoute path="/" component={HomeScreen} exact />
+            <PrivateRoute
+              path="/organization/create"
+              component={OrganizationScreen}
+            />
+            <PrivateRoute
+              path="/organizations"
+              component={OrganizationListScreen}
+            />
+            <PrivateRoute path="/" component={HomeScreen} exact />
+            <Route path="*" component={ErrorScreen} />
+           
+          </Switch>
         </Container>
       </main>
       <Footer />

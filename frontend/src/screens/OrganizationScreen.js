@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import FormContainer from '../components/FormContainer'
-import { createOrganization } from '../store/actions/organizationAction'
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import FormContainer from "../components/FormContainer";
+import { createOrganization } from "../store/actions/organizationAction";
 import Message from "../components/Message";
 
 const OrganizationScreen = ({ location, history }) => {
@@ -14,28 +14,28 @@ const OrganizationScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const addOrganization = useSelector((state) => state.addOrganization)
-  const { loading, error, organization } = addOrganization
+  const addOrganization = useSelector((state) => state.addOrganization);
+  const { loading, error, organization } = addOrganization;
 
-    const redirect = location.search ? location.search.split("=")[1] : "/organizations";
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : "/organizations";
 
-      useEffect(() => {
-        if (organization) {
-          history.push(redirect);
-        }
-      }, [history, organization, redirect]);
-
+  useEffect(() => {
+    if (organization) {
+      history.push(redirect);
+    }
+  }, [history, organization, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createOrganization(name, email, phone, address));
-    
   };
 
   return (
     <FormContainer>
       <h1>Create Your Organization</h1>
-      {error && <Message variant='danger'>{error}</Message>}
+      {error && <Message variant="danger">{error}</Message>}
       {/* {loading && <Loader />} */}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
@@ -84,6 +84,6 @@ const OrganizationScreen = ({ location, history }) => {
       </Form>
     </FormContainer>
   );
-}
+};
 
 export default OrganizationScreen;
