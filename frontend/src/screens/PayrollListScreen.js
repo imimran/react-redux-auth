@@ -29,7 +29,9 @@ const PayrollListScreen = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Salary</th>
+            <th>Total Salary</th>
+            <th>Month</th>
+            <th>Year</th>
             <th>Organization</th>
             <th>Employee</th>
           </tr>
@@ -42,6 +44,8 @@ const PayrollListScreen = () => {
                   <td>{payroll.id}</td>
 
                   <td>{payroll.salary}</td>
+                  <td>{payroll.month}</td>
+                  <td>{payroll.year}</td>
                   <td>{payroll.organization.name}</td>
                   <td>{payroll.employee.name}</td>
                 </tr>

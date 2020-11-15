@@ -10,8 +10,10 @@ import { listEmployee } from "../store/actions/employeeActions";
 
 const CreatePayrollScreen = ({ location, history }) => {
   const [salary, setSalary] = useState("");
-  const [organizationId, setOrganizationId] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [employeeId, setEmployeeId] = useState("");
+  const [organizationId, setOrganizationId] = useState("");
 
   const dispatch = useDispatch();
 
@@ -24,11 +26,13 @@ const CreatePayrollScreen = ({ location, history }) => {
   const listOfEmployee = useSelector((state) => state.listOfEmployee);
   const { employees } = listOfEmployee;
 
-  const redirect = location.search ? location.search.spilt("=")[1] : "/payrolls"
+  const redirect = location.search
+    ? location.search.spilt("=")[1]
+    : "/payrolls";
 
   useEffect(() => {
-    if(payroll){
-      history.push(redirect)
+    if (payroll) {
+      history.push(redirect);
     }
     dispatch(listOrganization());
     dispatch(listEmployee());
@@ -36,7 +40,7 @@ const CreatePayrollScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createPayroll(salary, organizationId, employeeId));
+    dispatch(createPayroll(salary, month, year, employeeId, organizationId));
   };
 
   const handleOrganizationChange = (e) => {
@@ -54,14 +58,34 @@ const CreatePayrollScreen = ({ location, history }) => {
         <Form.Group controlId="salary">
           <Form.Label> Payroll</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Enter salary"
             value={salary}
             onChange={(e) => setSalary(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        {employees &&  (
+        <Form.Group controlId="month">
+          <Form.Label> Month</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter month"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="year">
+          <Form.Label> Payroll</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter year"
+            value={year}
+            onChange={(e) => setYear(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        {employees && (
           <Form.Group controlId="employeeId">
             <Form.Label> Select Employee</Form.Label>
             <Form.Control
