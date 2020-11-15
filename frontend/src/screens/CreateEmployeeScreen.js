@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { createEmployee } from "../store/actions/employeeActions";
@@ -18,7 +17,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const addEmployee = useSelector((state) => state.addEmployee);
-  const { loading, error, employee } = addEmployee;
+  const {  error, employee } = addEmployee;
 
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization);

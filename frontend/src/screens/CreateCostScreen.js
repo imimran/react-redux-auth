@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -16,7 +15,7 @@ const CreateCostScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const addCost = useSelector((state) => state.addCost);
-  const { loading, error, cost } = addCost;
+  const {  error, cost } = addCost;
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;

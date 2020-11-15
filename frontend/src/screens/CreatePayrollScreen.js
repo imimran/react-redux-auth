@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -18,7 +18,7 @@ const CreatePayrollScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const addPayroll = useSelector((state) => state.addPayroll);
-  const { loading, error, payroll } = addPayroll;
+  const {  error, payroll } = addPayroll;
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
@@ -52,7 +52,7 @@ const CreatePayrollScreen = ({ location, history }) => {
   };
   return (
     <FormContainer>
-      <h1>Create Your Payroll</h1>
+      <h1>Create Payslip</h1>
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="salary">

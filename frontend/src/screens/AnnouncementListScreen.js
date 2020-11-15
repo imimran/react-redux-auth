@@ -8,7 +8,7 @@ const AnnouncementListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfAnnouncement = useSelector((state) => state.listOfAnnouncement);
-  const { loading, error, announcements } = listOfAnnouncement;
+  const { announcements } = listOfAnnouncement;
   
 
   useEffect(() => {

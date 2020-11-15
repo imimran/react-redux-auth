@@ -8,7 +8,7 @@ const CostListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfCost = useSelector((state) => state.listOfCost);
-  const { loading, error, costs } = listOfCost;
+  const { costs } = listOfCost;
 
   useEffect(() => {
     dispatch(listCost());

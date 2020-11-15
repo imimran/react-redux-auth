@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { createOrganization } from "../store/actions/organizationAction";
@@ -15,7 +14,7 @@ const OrganizationScreen = ({ location, history }) => {
   const dispatch = useDispatch();
 
   const addOrganization = useSelector((state) => state.addOrganization);
-  const { loading, error, organization } = addOrganization;
+  const {  error, organization } = addOrganization;
 
   const redirect = location.search
     ? location.search.split("=")[1]

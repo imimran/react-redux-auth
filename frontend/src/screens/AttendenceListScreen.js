@@ -2,18 +2,17 @@ import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listAttendence } from "../store/actions/attendenceActions";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const AttendenceListScreen = () => {
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
+  const listOfAttendence = useSelector((state) => state.listOfAttendence);
+  const { loading, error, attendences } = listOfAttendence;
 
-const listOfAttendence = useSelector((state) => state.listOfAttendence);
-const { loading, error, attendences} = listOfAttendence
-
-useEffect(() =>{
-    dispatch(listAttendence())
-}, [dispatch])
+  useEffect(() => {
+    dispatch(listAttendence());
+  }, [dispatch]);
 
   return (
     <>

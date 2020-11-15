@@ -3,7 +3,6 @@ import { Card, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { employeeDetails } from "../store/actions/employeeActions";
 
-import { Link } from "react-router-dom";
 
 const EmployeeDetailsScreen = ({match}) => {
     

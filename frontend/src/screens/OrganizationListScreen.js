@@ -10,7 +10,7 @@ const OrganizationListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization)
-  const { loading, error, organizations  } = listOfOrganization
+  const { organizations  } = listOfOrganization
  
 
   useEffect(() =>{

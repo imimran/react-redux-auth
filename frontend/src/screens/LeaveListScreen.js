@@ -8,7 +8,7 @@ const LeaveListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfLeave = useSelector((state) => state.listOfLeave);
-  const { loading, error, leaves } = listOfLeave;
+  const { leaves } = listOfLeave;
 
   useEffect(() => {
     dispatch(listLeave());

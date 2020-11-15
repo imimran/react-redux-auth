@@ -9,7 +9,7 @@ const PayrollListScreen = () => {
   const dispatch = useDispatch();
 
   const listOfPayroll = useSelector((state) => state.listOfPayroll);
-  const { loading, error, payrolls } = listOfPayroll;
+  const {  payrolls } = listOfPayroll;
 
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const PayrollListScreen = () => {
         className="btn btn-primary"
         style={{ marginBottom: 20 }}
       >
-        Add Payroll
+        Create Payslip
       </Link>
       <Table striped bordered hover variant="dark">
         <thead>
