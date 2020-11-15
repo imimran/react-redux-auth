@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import {
@@ -26,7 +27,7 @@ const UpdateEmployeeScreen = ({ match, history }) => {
 
   const detailsEmployee = useSelector((state) => state.detailsEmployee);
   const { employee } = detailsEmployee;
-  console.log('employee', employee);
+  console.log("employee", employee);
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
 
@@ -37,8 +38,6 @@ const UpdateEmployeeScreen = ({ match, history }) => {
     if (successUpdate) {
       dispatch({ type: EMPLOYEE_UPDATE_RESET });
       history.push("/employees");
-
-    
     } else {
       if (employee === undefined || employee === null) {
         history.push("/employees");
@@ -49,10 +48,8 @@ const UpdateEmployeeScreen = ({ match, history }) => {
         setDepartment(employee.department);
         setOrganizationId(employee.organizationId);
       }
-      
-             
     }
-  }, [dispatch, employee, history, successUpdate, employeeId]);
+  }, [dispatch, successUpdate, employeeId]);
 
   const submitHandler = (e) => {
     e.preventDefault();

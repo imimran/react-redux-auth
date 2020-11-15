@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Card, Container } from "react-bootstrap";
+import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 import { employeeDetails } from "../store/actions/employeeActions";
 
@@ -24,10 +25,11 @@ const EmployeeDetailsScreen = ({match}) => {
 
   return (
     <>
-      <Container>
+      <FormContainer>
         <Card style={{ width: "18rem" }}>
           {employee && (
             <Card.Body>
+             
               <Card.Title>Employee details</Card.Title>
               <Card.Text>ID: {employee.id} </Card.Text>
               <Card.Text>Name: {employee.name} </Card.Text>
@@ -39,7 +41,7 @@ const EmployeeDetailsScreen = ({match}) => {
             </Card.Body>
           )}
         </Card>
-      </Container>
+      </FormContainer>
     </>
   );
 };
