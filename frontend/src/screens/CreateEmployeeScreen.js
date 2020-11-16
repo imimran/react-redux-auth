@@ -12,40 +12,48 @@ const CreateEmployeeScreen = ({ location, history }) => {
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [organizationId, setOrganizationId] = useState("");
-  
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
 
   const addEmployee = useSelector((state) => state.addEmployee);
-  const {  error, employee } = addEmployee;
-
+  const { error, employee } = addEmployee;
 
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
 
-const redirect = location.search ? location.search.split("=")[1]: "/employees"
+  const redirect = location.search
+    ? location.search.split("=")[1]
+    : "/employees";
 
   useEffect(() => {
-    if(employee){
-      history.push(redirect)
+    if (employee) {
+      history.push(redirect);
     }
     dispatch(listOrganization());
-  }, [dispatch, history, employee, redirect ]);
+  }, [dispatch, history, employee, redirect]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createEmployee(name, email, designation, department, organizationId));
+    dispatch(
+      createEmployee(name, email, designation, department, organizationId, image)
+    );
   };
   const handleOrganizationChange = (e) => {
     setOrganizationId(e);
   };
 
+  const onFileChange = (e) => {
+    setImage(e);
+    
+  };
+
   return (
     <FormContainer>
       <h1>Create Your Employee</h1>
-     
+
       {error && <Message variant="danger">{error}</Message>}
-      
+
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label> Employee Name</Form.Label>
@@ -102,6 +110,15 @@ const redirect = location.search ? location.search.split("=")[1]: "/employees"
             </Form.Control>
           </Form.Group>
         )}
+
+        <Form.Group controlId="image">
+          <Form.Label> Employee image</Form.Label>
+          <Form.Control
+            type="file"
+            value={image}
+            onChange={(e) => onFileChange(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
 
         <Button type="submit" variant="primary">
           Create Emoloyee

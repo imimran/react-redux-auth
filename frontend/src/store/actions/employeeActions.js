@@ -24,7 +24,7 @@ export const createEmployee = (
   email,
   designation,
   department,
-  organizationId
+  organizationId, image
 ) => async (dispatch) => {
   try {
     if (localStorage.token) {
@@ -35,16 +35,23 @@ export const createEmployee = (
       type: CREATE_EMPLOYEE_REQUEST,
     });
 
+     
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem("authToken"),
       },
     };
 
+    axios
+      .post("http://localhost:4000/uploads", config)
+      .then((response) => console.log(response))
+      .catch((errors) => console.log(errors));
+
+
     const { data } = await axios.post(
       "http://localhost:4000/api/employee",
-      { name, email, designation, department, organizationId },
+      { name, email, designation, department, organizationId, image },
       config
     );
 
