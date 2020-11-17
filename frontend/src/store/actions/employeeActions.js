@@ -24,7 +24,8 @@ export const createEmployee = (
   email,
   designation,
   department,
-  organizationId, image
+  organizationId,
+  image
 ) => async (dispatch) => {
   try {
     if (localStorage.token) {
@@ -36,23 +37,20 @@ export const createEmployee = (
     });
 
      
+
     const config = {
       headers: {
+        // "Content-Type": "application/json",
+        //  'Accept': "application/json",
         "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem("authToken"),
       },
     };
 
-    axios
-      .post("http://localhost:4000/uploads", config)
-      .then((response) => console.log(response))
-      .catch((errors) => console.log(errors));
-
-
     const { data } = await axios.post(
-      "http://localhost:4000/api/employee",
-      { name, email, designation, department, organizationId, image },
-      config
+      "http://localhost:4000/api/employee", 
+      { name, email, designation, department, organizationId, image} ,
+     config
     );
 
     dispatch({
@@ -77,36 +75,32 @@ export const createEmployee = (
 
 export const employeeDetails = (id) => async (dispatch) => {
   try {
-
-       if (localStorage.token) {
-         setAuthToken(localStorage.token);
-       }
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     dispatch({ type: EMPLOYEE_DETAILS_REQUEST });
 
-       const config = {
-         headers: {
-           "Content-Type": "application/json",
-           "auth-token": localStorage.getItem("authToken"),
-         },
-       };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    };
 
     const { data } = await axios.get(
-      `http://localhost:4000/api/employee/${id}`, config
+      `http://localhost:4000/api/employee/${id}`,
+      config
     );
-
 
     dispatch({
       type: EMPLOYEE_DETAILS_SUCCESS,
       payload: data.results.data,
-       
     });
 
-
-     if (localStorage.token) {
-       setAuthToken(localStorage.token);
-     }
-     localStorage.setItem("employeeDetails", JSON.stringify(data));
-
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    localStorage.setItem("employeeDetails", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: EMPLOYEE_DETAILS_FAIL,
@@ -176,10 +170,7 @@ export const deleteEmployee = (id) => async (dispatch) => {
       },
     };
 
-    await axios.delete(
-      `http://localhost:4000/api/employee/${id}`,
-      config
-    );
+    await axios.delete(`http://localhost:4000/api/employee/${id}`, config);
 
     dispatch({
       type: EMPLOYEE_DELETE_SUCCESS,
@@ -211,7 +202,11 @@ export const editEmployee = (employee) => async (dispatch) => {
       },
     };
 
-    const {data} = await axios.put(`http://localhost:4000/api/employee/${employee.id}`, employee, config);
+    const { data } = await axios.put(
+      `http://localhost:4000/api/employee/${employee.id}`,
+      employee,
+      config
+    );
 
     dispatch({
       type: EMPLOYEE_UPDATE_SUCCESS,
@@ -220,11 +215,10 @@ export const editEmployee = (employee) => async (dispatch) => {
 
     console.log(data.results.data);
 
-     if (localStorage.token) {
-       setAuthToken(localStorage.token);
-     }
-     localStorage.setItem("updateEmployee", JSON.stringify(data));
-
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    localStorage.setItem("updateEmployee", JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: EMPLOYEE_UPDATE_FAIL,
