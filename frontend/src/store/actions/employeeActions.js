@@ -36,8 +36,6 @@ export const createEmployee = (
       type: CREATE_EMPLOYEE_REQUEST,
     });
 
-     
-
     const config = {
       headers: {
         // "Content-Type": "application/json",
@@ -47,10 +45,18 @@ export const createEmployee = (
       },
     };
 
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("designation", designation);
+    formData.append("department", department);
+    formData.append("organizationId", organizationId);
+    formData.append("image", image);
+
     const { data } = await axios.post(
-      "http://localhost:4000/api/employee", 
-      { name, email, designation, department, organizationId, image} ,
-     config
+      "http://localhost:4000/api/employee",
+      formData,
+      config
     );
 
     dispatch({
