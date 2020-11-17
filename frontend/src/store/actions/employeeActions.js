@@ -36,15 +36,6 @@ export const createEmployee = (
       type: CREATE_EMPLOYEE_REQUEST,
     });
 
-    const config = {
-      headers: {
-        // "Content-Type": "application/json",
-        //  'Accept': "application/json",
-        "Content-Type": "multipart/form-data",
-        "auth-token": localStorage.getItem("authToken"),
-      },
-    };
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -52,6 +43,15 @@ export const createEmployee = (
     formData.append("department", department);
     formData.append("organizationId", organizationId);
     formData.append("image", image);
+    console.log(formData);
+    console.log("boundary:", formData._boundary);
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "auth-token": localStorage.getItem("authToken"),
+      },
+    };
 
     const { data } = await axios.post(
       "http://localhost:4000/api/employee",

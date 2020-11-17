@@ -35,6 +35,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(image)
     dispatch(
       createEmployee(name, email, designation, department, organizationId, image)
     );
@@ -44,6 +45,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
   };
 
   const onFileChange = (e) => {
+    console.log(e)
     setImage(e);
     
   };
@@ -110,14 +112,13 @@ const CreateEmployeeScreen = ({ location, history }) => {
             </Form.Control>
           </Form.Group>
         )}
-
+       
         <Form.Group controlId="image">
-          <Form.Label> Employee image</Form.Label>
-          <Form.Control
-            type="file"
-            value={image}
-            onChange={(e) => onFileChange(e.target.value)}
-          ></Form.Control>
+          <Form.Label> Image</Form.Label>
+          <Form.File
+            id="exampleFormControlFile1"
+            onChange={(e) => onFileChange(e.target.files[0])}
+          />
         </Form.Group>
 
         <Button type="submit" variant="primary">
