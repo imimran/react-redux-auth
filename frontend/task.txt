@@ -1,2 +1,10 @@
-*add sidebar
-* build some logic
+
+HOME
+COMPANY:
+EMPLOYEE: salary, phone, address, select2
+ANNOUNCE:  send to all employee, datetime
+PAYROLL: due, month-year
+ATTENDENCE: date, status
+LEAVES: multi datetime, status, reason field,
+COST
+USER ROLE & PERMISSION

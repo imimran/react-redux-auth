@@ -9,6 +9,8 @@ import { listOrganization } from "../store/actions/organizationAction";
 
 const CreateLeavesScreen = ({ location, history }) => {
   const [leaveForDays, setLeaveForDays] = useState("");
+   const [reason, setReason] = useState("");
+    const [status, setStatus] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [organizationId, setOrganizationId] = useState("");
 
@@ -39,7 +41,7 @@ const CreateLeavesScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createLeave(leaveForDays, organizationId, employeeId));
+    dispatch(createLeave(leaveForDays,reason, status, organizationId, employeeId));
   };
 
     const handleOrganizationChange = (e) => {
@@ -50,19 +52,48 @@ const CreateLeavesScreen = ({ location, history }) => {
     setEmployeeId(e);
   };
 
+    const handleStatusChange = (e) => {
+      setStatus(e);
+    };
+
   return (
     <FormContainer>
       <h1>Create Your Leaves</h1>
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="name">
+        <Form.Group controlId="days">
           <Form.Label> Request for Days</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter name"
+            type="number"
+            placeholder="Enter days"
             value={leaveForDays}
             onChange={(e) => setLeaveForDays(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="reason">
+          <Form.Label>Reason</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            type="text"
+            placeholder="Enter reason"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="status">
+          <Form.Label> Status</Form.Label>
+          <Form.Control
+            as="select"
+            onChange={(e) => handleStatusChange(e.target.value)}
+          >
+            <option>Select</option>
+            <option>Approve</option>
+            <option>Reject</option>
+            <option>Pending</option>
+          </Form.Control>
         </Form.Group>
 
         {organizations && organizations.length > 0 && (
@@ -72,6 +103,7 @@ const CreateLeavesScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleOrganizationChange(e.target.value)}
             >
+              <option>Select Organization </option>
               {organizations.map((organization, index) => (
                 <option value={organization.id} key={index}>
                   {organization.name}
@@ -88,6 +120,7 @@ const CreateLeavesScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleEmployeeChange(e.target.value)}
             >
+              <option>Select Employee</option>
               {employees.map((employee, index) => (
                 <option value={employee.id} key={index}>
                   {employee.name}

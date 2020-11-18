@@ -29,6 +29,7 @@ const AnnouncementListScreen = () => {
             <th>#</th>
             <th>Announcement</th>
             <th>Organization Name</th>
+            <th>Time</th>
           </tr>
         </thead>
         {announcements && (
@@ -39,6 +40,7 @@ const AnnouncementListScreen = () => {
                   <td>{announcement.id}</td>
                   <td>{announcement.message}</td>
                   <td>{announcement.organization.name}</td>
+                  <td>{announcement.createdAt}</td>
                 </tr>
               ))
             ) : (

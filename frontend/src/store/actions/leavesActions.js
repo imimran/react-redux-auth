@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createLeave = (leaveForDays, organizationId, employeeId) => async (
+export const createLeave = (leaveForDays, reason, status, organizationId, employeeId) => async (
   dispatch
 ) => {
   try {
@@ -31,7 +31,7 @@ export const createLeave = (leaveForDays, organizationId, employeeId) => async (
 
     const { data } = await axios.post(
       "http://localhost:4000/api/leave-request",
-      { leaveForDays, organizationId, employeeId },
+      { leaveForDays, reason, status, organizationId, employeeId },
       config
     );
 

@@ -9,7 +9,8 @@ import { listOrganization } from "../store/actions/organizationAction";
 import { listEmployee } from "../store/actions/employeeActions";
 
 const CreatePayrollScreen = ({ location, history }) => {
-  const [salary, setSalary] = useState("");
+  const [pay, setPay] = useState("");
+  const [due, setDue] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [employeeId, setEmployeeId] = useState("");
@@ -40,7 +41,7 @@ const CreatePayrollScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createPayroll(salary, month, year, employeeId, organizationId));
+    dispatch(createPayroll(pay, due, month, year, employeeId, organizationId));
   };
 
   const handleOrganizationChange = (e) => {
@@ -55,13 +56,23 @@ const CreatePayrollScreen = ({ location, history }) => {
       <h1>Create Payslip</h1>
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="salary">
-          <Form.Label> Payroll</Form.Label>
+        <Form.Group controlId="pay">
+          <Form.Label> Pay Amount</Form.Label>
           <Form.Control
             type="number"
-            placeholder="Enter salary"
-            value={salary}
-            onChange={(e) => setSalary(e.target.value)}
+            placeholder="Enter pay amount"
+            value={pay}
+            onChange={(e) => setPay(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="due">
+          <Form.Label> Due Amount</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter due amount"
+            value={due}
+            onChange={(e) => setDue(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
@@ -92,6 +103,7 @@ const CreatePayrollScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleEmployeeChange(e.target.value)}
             >
+              <option> Select Employee</option>
               {employees.map((employee, index) => (
                 <option value={employee.id} key={index}>
                   {employee.name}
@@ -108,6 +120,7 @@ const CreatePayrollScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleOrganizationChange(e.target.value)}
             >
+              <option> Select Organization</option>
               {organizations.map((organization, index) => (
                 <option value={organization.id} key={index}>
                   {organization.name}

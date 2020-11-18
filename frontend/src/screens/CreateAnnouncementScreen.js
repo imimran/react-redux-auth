@@ -45,7 +45,8 @@ const CreateAnouncementScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="message">
           <Form.Label> Announcement</Form.Label>
-          <Form.Control
+          
+           <Form.Control as="textarea" rows={3} 
             type="text"
             placeholder="Enter message"
             value={message}
@@ -59,6 +60,7 @@ const CreateAnouncementScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleOrganizationChange(e.target.value)}
             >
+              <option>Select Organization</option>
               {organizations.map((organization, index) => (
                 <option value={organization.id} key={index}>
                   {organization.name}

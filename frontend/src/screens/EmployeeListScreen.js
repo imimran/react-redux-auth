@@ -43,6 +43,7 @@ const EmployeeListScreen = () => {
           <tr>
             <th>#</th>
             <th>Employee Name</th>
+            <th>Phone</th>
             <th>Email</th>
             <th>Designation</th>
             <th>Department</th>
@@ -57,6 +58,7 @@ const EmployeeListScreen = () => {
                 <tr key={employee.id}>
                   <td>{employee.id}</td>
                   <td>{employee.name}</td>
+                  <td>{employee.phone}</td>
                   <td>{employee.email}</td>
                   <td>{employee.designation}</td>
                   <td>{employee.department}</td>

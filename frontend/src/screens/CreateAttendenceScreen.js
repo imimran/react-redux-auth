@@ -8,8 +8,8 @@ import { listOrganization } from "../store/actions/organizationAction";
 import { listEmployee } from "../store/actions/employeeActions";
 
 const CreateAttendenceScreen = ({ location, history }) => {
-  const [month, setMonth] = useState("");
-  const [leaves, setLeaves] = useState("");
+  const [day, setDay] = useState("");
+  const [status, setStatus] = useState("");
   const [organizationId, setOrganizationId] = useState("");
   const [employeeId, setEmployeeId] = useState("");
 
@@ -38,7 +38,7 @@ const CreateAttendenceScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createAttendence(month, leaves, employeeId, organizationId));
+    dispatch(createAttendence(day, status, employeeId, organizationId));
   };
 
   const handleOrganizationChange = (e) => {
@@ -49,18 +49,22 @@ const CreateAttendenceScreen = ({ location, history }) => {
     setEmployeeId(e);
   };
 
+  const handleStatusChange = (e) =>{
+    setStatus(e)
+  }
+
   return (
     <FormContainer>
-      <h1>Create Your Attendence</h1>
+      <h1>Add Attendence</h1>
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId="month">
+        <Form.Group controlId="day">
           <Form.Label> Attendence</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter month"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
+            type="date"
+            placeholder="Enter day"
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
@@ -77,14 +81,17 @@ const CreateAttendenceScreen = ({ location, history }) => {
     />
   );
 }; */}
-        <Form.Group controlId="leaves">
-          <Form.Label> Leaves</Form.Label>
+        <Form.Group controlId="status">
+          <Form.Label> status</Form.Label>
           <Form.Control
-            type="number"
-            placeholder="Enter leaves"
-            value={leaves}
-            onChange={(e) => setLeaves(e.target.value)}
-          ></Form.Control>
+            as="select"
+            onChange={(e) => handleStatusChange(e.target.value)}
+          >
+            <option>Select</option>
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Leave</option>
+          </Form.Control>
         </Form.Group>
 
         {employees && employees.length > 0 && (
@@ -94,6 +101,7 @@ const CreateAttendenceScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleEmployeeChange(e.target.value)}
             >
+              <option>Select Employee</option>
               {employees.map((employee, index) => (
                 <option value={employee.id} key={index}>
                   {employee.name}
@@ -110,6 +118,7 @@ const CreateAttendenceScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleOrganizationChange(e.target.value)}
             >
+              <option>Select Organization</option>
               {organizations.map((organization, index) => (
                 <option value={organization.id} key={index}>
                   {organization.name}

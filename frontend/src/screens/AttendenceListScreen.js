@@ -27,8 +27,8 @@ const AttendenceListScreen = () => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Month</th>
-            <th>Days of Leave</th>
+            <th>Date</th>
+            <th>Status</th>
             <th>Organization</th>
             <th>Employee </th>
           </tr>
@@ -39,8 +39,8 @@ const AttendenceListScreen = () => {
               attendences.map((attendence) => (
                 <tr key={attendence.id}>
                   <td>{attendence.id}</td>
-                  <td>{attendence.month}</td>
-                  <td>{attendence.leaves}</td>
+                  <td>{attendence.day}</td>
+                  <td>{attendence.status}</td>
                   <td>{attendence.organization.name}</td>
                   <td>{attendence.employee.name}</td>
                 </tr>

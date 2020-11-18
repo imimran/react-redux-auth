@@ -11,7 +11,7 @@ import {
 import setAuthToken from "../../utils/setAuthToken";
 
 
-export const createAttendence = (month, leaves, employeeId, organizationId) => async (
+export const createAttendence = (day, status, employeeId, organizationId) => async (
   dispatch
 ) => {
   try {
@@ -32,7 +32,7 @@ export const createAttendence = (month, leaves, employeeId, organizationId) => a
 
     const { data } = await axios.post(
       "http://localhost:4000/api/attendence",
-      { month, leaves, employeeId, organizationId },
+      { day, status, employeeId, organizationId },
       config
     );
 

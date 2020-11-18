@@ -9,6 +9,9 @@ import { listOrganization } from "../store/actions/organizationAction";
 const CreateEmployeeScreen = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [salary, setSalary] = useState("");
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [organizationId, setOrganizationId] = useState("");
@@ -37,7 +40,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
     e.preventDefault();
     console.log(image)
     dispatch(
-      createEmployee(name, email, designation, department, organizationId, image)
+      createEmployee(name, email, phone, address, salary, designation, department, organizationId, image)
     );
   };
   const handleOrganizationChange = (e) => {
@@ -77,6 +80,36 @@ const CreateEmployeeScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
+        <Form.Group controlId="phone">
+          <Form.Label>Phone </Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="address">
+          <Form.Label> Address</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="salary">
+          <Form.Label> Total Salary </Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter salary"
+            value={salary}
+            onChange={(e) => setSalary(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group controlId="designation">
           <Form.Label>Designation</Form.Label>
           <Form.Control
@@ -104,6 +137,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
               as="select"
               onChange={(e) => handleOrganizationChange(e.target.value)}
             >
+              <option> Select </option>
               {organizations.map((organization, index) => (
                 <option value={organization.id} key={index}>
                   {organization.name}
@@ -112,7 +146,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
             </Form.Control>
           </Form.Group>
         )}
-       
+
         <Form.Group controlId="image">
           <Form.Label> Image</Form.Label>
           <Form.File

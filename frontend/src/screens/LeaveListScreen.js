@@ -27,6 +27,8 @@ const LeaveListScreen = () => {
           <tr>
             <th>#</th>
             <th>Leave Requeat</th>
+            <th>Reason</th>
+            <th>Status</th>
             <th>Organization</th>
             <th>Employee </th>
           </tr>
@@ -39,6 +41,8 @@ const LeaveListScreen = () => {
                   <td>{leave.id}</td>
 
                   <td>{leave.leaveForDays}</td>
+                  <td>{leave.reason}</td>
+                  <td>{leave.status}</td>
                   <td>{leave.organization.name}</td>
                   <td>{leave.employee.name}</td>
                 </tr>
