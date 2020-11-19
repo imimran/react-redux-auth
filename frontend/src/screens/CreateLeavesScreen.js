@@ -6,55 +6,59 @@ import { createLeave } from "../store/actions/leavesActions";
 import Message from "../components/Message";
 import { listEmployee } from "../store/actions/employeeActions";
 import { listOrganization } from "../store/actions/organizationAction";
+import MultipleDatePicker from "react-multiple-datepicker";
+import DatePicker from "react-multi-date-picker";
 
 const CreateLeavesScreen = ({ location, history }) => {
-  const [leaveForDays, setLeaveForDays] = useState("");
-   const [reason, setReason] = useState("");
-    const [status, setStatus] = useState("");
+  const today = new Date();
+  const tomorrow = new Date();
+
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const [leaveForDays, setLeaveForDays] = useState([today, tomorrow]);
+  const [reason, setReason] = useState("");
+  const [status, setStatus] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [organizationId, setOrganizationId] = useState("");
-
 
   const dispatch = useDispatch();
 
   const addLeave = useSelector((state) => state.addLeave);
-  const {  error, leave } = addLeave;
+  const { error, leave } = addLeave;
 
-    const listOfOrganization = useSelector((state) => state.listOfOrganization);
-    const { organizations } = listOfOrganization;
+  const listOfOrganization = useSelector((state) => state.listOfOrganization);
+  const { organizations } = listOfOrganization;
 
   const listOfEmployee = useSelector((state) => state.listOfEmployee);
   const { employees } = listOfEmployee;
 
-  const redirect = location.search
-    ? location.search.spilt("=")[1]
-    : "/leaves";
-
+  const redirect = location.search ? location.search.spilt("=")[1] : "/leaves";
 
   useEffect(() => {
-      if (leave) {
-        history.push(redirect);
-      }
+    if (leave) {
+      history.push(redirect);
+    }
     dispatch(listOrganization());
     dispatch(listEmployee());
   }, [dispatch, redirect, history, leave]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createLeave(leaveForDays,reason, status, organizationId, employeeId));
+    dispatch(
+      createLeave(leaveForDays, reason, status, organizationId, employeeId)
+    );
   };
 
-    const handleOrganizationChange = (e) => {
-      setOrganizationId(e);
-    };
+  const handleOrganizationChange = (e) => {
+    setOrganizationId(e);
+  };
 
   const handleEmployeeChange = (e) => {
     setEmployeeId(e);
   };
 
-    const handleStatusChange = (e) => {
-      setStatus(e);
-    };
+  const handleStatusChange = (e) => {
+    setStatus(e);
+  };
 
   return (
     <FormContainer>
@@ -63,12 +67,19 @@ const CreateLeavesScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="days">
           <Form.Label> Request for Days</Form.Label>
-          <Form.Control
+
+          <DatePicker range />
+
+          {/* <MultipleDatePicker
+            onSubmit={(dates) => setLeaveForDays(dates)}
+          /> */}
+
+          {/* <Form.Control
             type="number"
             placeholder="Enter days"
             value={leaveForDays}
             onChange={(e) => setLeaveForDays(e.target.value)}
-          ></Form.Control>
+          ></Form.Control> */}
         </Form.Group>
 
         <Form.Group controlId="reason">
