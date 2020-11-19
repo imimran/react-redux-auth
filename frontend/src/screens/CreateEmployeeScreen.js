@@ -38,7 +38,6 @@ const CreateEmployeeScreen = ({ location, history }) => {
       options.push({ value: organization.id, label: organization.name })
     );
   }
-  
 
   const handleSelectChange = (options) => {
     console.log("handle", options);
@@ -50,7 +49,6 @@ const CreateEmployeeScreen = ({ location, history }) => {
       history.push(redirect);
     }
     dispatch(listOrganization());
-    
   }, [dispatch, history, employee, redirect]);
 
   const submitHandler = (e) => {
@@ -156,25 +154,12 @@ const CreateEmployeeScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        {organizations && organizations.length > 0 && (
-          // <Form.Group controlId="organizationId">
-          //   <Form.Label> Select Organization</Form.Label>
-
-          //   <Form.Control
-          //     as="select"
-          //     onChange={(e) => handleOrganizationChange(e.target.value)}
-          //   >
-          //     <option> Select </option>
-          //     {organizations.map((organization, index) => (
-          //       <option value={organization.id} key={index}>
-          //         {organization.name}
-          //       </option>
-          //     ))}
-          //   </Form.Control>
-          // </Form.Group>
-          <Select options={options} onChange={handleSelectChange} />
-        )}
-
+        <Form.Group>
+          <Form.Label> Select Organization</Form.Label>
+          {organizations && organizations.length > 0 && (
+            <Select options={options} onChange={handleSelectChange} />
+          )}
+        </Form.Group>
         <Form.Group controlId="image">
           <Form.Label> Image</Form.Label>
           <Form.File

@@ -16,9 +16,13 @@ const UpdateEmployeeScreen = ({ match, history }) => {
   console.log(match.params.id);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+   const [phone, setPhone] = useState("");
+   const [address, setAddress] = useState("");
+   const [salary, setSalary] = useState("");
   const [designation, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [organizationId, setOrganizationId] = useState("");
+  //  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
 
@@ -44,9 +48,13 @@ const UpdateEmployeeScreen = ({ match, history }) => {
       } else {
         setName(employee.name);
         setEmail(employee.email);
+        setPhone(employee.phone)
+        setAddress(employee.address)
+        setSalary(employee.salary)
         setDesignation(employee.designation);
         setDepartment(employee.department);
         setOrganizationId(employee.organizationId);
+        //setImage(employee.image)
       }
     }
   }, [dispatch, successUpdate, employeeId]);
@@ -58,9 +66,13 @@ const UpdateEmployeeScreen = ({ match, history }) => {
         id: employeeId,
         name,
         email,
+        phone,
+        address,
+        salary,
         designation,
         department,
         organizationId,
+        //image
       })
     );
   };
@@ -68,6 +80,11 @@ const UpdateEmployeeScreen = ({ match, history }) => {
   const handleOrganizationChange = (e) => {
     setOrganizationId(e);
   };
+
+    // const onFileChange = (e) => {
+    //   console.log(e);
+    //   setImage(e);
+    // };
 
   return (
     <FormContainer>
@@ -94,6 +111,36 @@ const UpdateEmployeeScreen = ({ match, history }) => {
               placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="phone">
+            <Form.Label>Phone </Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="address">
+            <Form.Label> Address</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Form.Group controlId="salary">
+            <Form.Label> Total Salary </Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter salary"
+              value={salary}
+              onChange={(e) => setSalary(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -132,6 +179,14 @@ const UpdateEmployeeScreen = ({ match, history }) => {
               </Form.Control>
             </Form.Group>
           )}
+
+          {/* <Form.Group controlId="image">
+            <Form.Label> Image</Form.Label>
+            <Form.File
+              id="exampleFormControlFile1"
+              onChange={(e) => onFileChange(e.target.files[0])}
+            />
+          </Form.Group> */}
 
           <Button type="submit" variant="primary">
             Update Employee
