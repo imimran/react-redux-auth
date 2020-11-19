@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -16,6 +17,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
   const [department, setDepartment] = useState("");
   const [organizationId, setOrganizationId] = useState("");
   const [image, setImage] = useState("");
+  const [organizationList, setOrganizationList] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -29,6 +31,19 @@ const CreateEmployeeScreen = ({ location, history }) => {
     ? location.search.split("=")[1]
     : "/employees";
 
+  const options = [];
+
+    if (organizations) {
+      organizations.map((organization) =>
+        options.push({ value: organization.name, label: organization.name })
+      );
+  }
+
+  const handleSelectChange = (options) => {
+    setOrganizationList(options);
+    
+  };
+
   useEffect(() => {
     if (employee) {
       history.push(redirect);
@@ -38,19 +53,28 @@ const CreateEmployeeScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(image)
+    console.log(image);
     dispatch(
-      createEmployee(name, email, phone, address, salary, designation, department, organizationId, image)
+      createEmployee(
+        name,
+        email,
+        phone,
+        address,
+        salary,
+        designation,
+        department,
+        organizationId,
+        image
+      )
     );
   };
-  const handleOrganizationChange = (e) => {
-    setOrganizationId(e);
-  };
+  // const handleOrganizationChange = (e) => {
+  //   setOrganizationId(e);
+  // };
 
   const onFileChange = (e) => {
-    console.log(e)
+    console.log(e);
     setImage(e);
-    
   };
 
   return (
@@ -131,20 +155,26 @@ const CreateEmployeeScreen = ({ location, history }) => {
         </Form.Group>
 
         {organizations && organizations.length > 0 && (
-          <Form.Group controlId="organizationId">
-            <Form.Label> Select Organization</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={(e) => handleOrganizationChange(e.target.value)}
-            >
-              <option> Select </option>
-              {organizations.map((organization, index) => (
-                <option value={organization.id} key={index}>
-                  {organization.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
+          // <Form.Group controlId="organizationId">
+          //   <Form.Label> Select Organization</Form.Label>
+
+          //   <Form.Control
+          //     as="select"
+          //     onChange={(e) => handleOrganizationChange(e.target.value)}
+          //   >
+          //     <option> Select </option>
+          //     {organizations.map((organization, index) => (
+          //       <option value={organization.id} key={index}>
+          //         {organization.name}
+          //       </option>
+          //     ))}
+          //   </Form.Control>
+          // </Form.Group>
+          <Select
+            value={organizationList}
+            options={options}
+            onChange={handleSelectChange}
+          />
         )}
 
         <Form.Group controlId="image">
