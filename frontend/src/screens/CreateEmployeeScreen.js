@@ -32,15 +32,17 @@ const CreateEmployeeScreen = ({ location, history }) => {
     : "/employees";
 
   const options = [];
-
-    if (organizations) {
-      organizations.map((organization) =>
+  console.log("organizations", organizations);
+  if (organizations) {
+    organizations.map((organization) =>
       options.push({ value: organization.id, label: organization.name })
-      );
+    );
   }
+  
 
   const handleSelectChange = (options) => {
-    setOrganizationList(options);  
+    console.log("handle", options);
+    setOrganizationId(options.value);
   };
 
   useEffect(() => {
@@ -48,6 +50,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
       history.push(redirect);
     }
     dispatch(listOrganization());
+    
   }, [dispatch, history, employee, redirect]);
 
   const submitHandler = (e) => {
@@ -169,11 +172,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
           //     ))}
           //   </Form.Control>
           // </Form.Group>
-          <Select
-           
-            options={options}
-            onChange={handleSelectChange}
-          />
+          <Select options={options} onChange={handleSelectChange} />
         )}
 
         <Form.Group controlId="image">
