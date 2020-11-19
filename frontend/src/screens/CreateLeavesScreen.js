@@ -6,8 +6,9 @@ import { createLeave } from "../store/actions/leavesActions";
 import Message from "../components/Message";
 import { listEmployee } from "../store/actions/employeeActions";
 import { listOrganization } from "../store/actions/organizationAction";
-import MultipleDatePicker from "react-multiple-datepicker";
 import DatePicker from "react-multi-date-picker";
+import "react-multi-date-picker/styles/colors/red.css";
+import "react-multi-date-picker/styles/layouts/mobile.css";
 
 const CreateLeavesScreen = ({ location, history }) => {
   const today = new Date();
@@ -66,14 +67,21 @@ const CreateLeavesScreen = ({ location, history }) => {
       {error && <Message variant="danger">{error}</Message>}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="days">
-          <Form.Label> Request for Days</Form.Label>
-
-          <DatePicker range />
-
-          {/* <MultipleDatePicker
-            onSubmit={(dates) => setLeaveForDays(dates)}
-          /> */}
-
+          <Form.Label> Request for Days</Form.Label> <br></br>
+          <DatePicker
+            range
+            className="red rmdp-mobile"
+            placeholder="Click to select date"
+            type="input-icon"
+            style={{
+              backgroundColor: "fff00f",
+              height: "40px",
+              width: "520px",
+              borderRadius: "8px",
+              fontSize: "14px",
+              padding: "20px 20px",
+            }}
+          />
           {/* <Form.Control
             type="number"
             placeholder="Enter days"
