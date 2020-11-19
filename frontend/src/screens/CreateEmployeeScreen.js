@@ -35,13 +35,12 @@ const CreateEmployeeScreen = ({ location, history }) => {
 
     if (organizations) {
       organizations.map((organization) =>
-        options.push({ value: organization.name, label: organization.name })
+      options.push({ value: organization.id, label: organization.name })
       );
   }
 
   const handleSelectChange = (options) => {
-    setOrganizationList(options);
-    
+    setOrganizationList(options);  
   };
 
   useEffect(() => {
@@ -171,7 +170,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
           //   </Form.Control>
           // </Form.Group>
           <Select
-            value={organizationList}
+           
             options={options}
             onChange={handleSelectChange}
           />
