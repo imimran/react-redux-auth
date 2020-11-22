@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -7,12 +6,14 @@ import { createPayroll } from "../store/actions/payrollActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
 import { listEmployee } from "../store/actions/employeeActions";
+import DatePicker from "react-multi-date-picker";
+import "react-multi-date-picker/styles/colors/red.css";
+import "react-multi-date-picker/styles/layouts/mobile.css";
 
 const CreatePayrollScreen = ({ location, history }) => {
   const [pay, setPay] = useState("");
   const [due, setDue] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const [month, setMonth] = useState(new Date());
   const [employeeId, setEmployeeId] = useState("");
   const [organizationId, setOrganizationId] = useState("");
 
@@ -41,7 +42,8 @@ const CreatePayrollScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createPayroll(pay, due, month, year, employeeId, organizationId));
+    console.log("month", month);
+    dispatch(createPayroll(pay, due, month, employeeId, organizationId));
   };
 
   const handleOrganizationChange = (e) => {
@@ -78,22 +80,27 @@ const CreatePayrollScreen = ({ location, history }) => {
 
         <Form.Group controlId="month">
           <Form.Label> Month</Form.Label>
-          <Form.Control
+          {/* <Form.Control
             type="number"
             placeholder="Enter month"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group controlId="year">
-          <Form.Label> Payroll</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter year"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          ></Form.Control>
+          ></Form.Control> */}
+          <DatePicker
+            onlyMonthPicker
+            format="MMMM YYYY"
+            placeholder="Click to select date"
+            type="input-icon"
+            style={{
+              backgroundColor: "fff00f",
+              height: "40px",
+              width: "520px",
+              borderRadius: "8px",
+              fontSize: "14px",
+              padding: "20px 20px",
+            }}
+            //onChange={setMonth}
+          />
         </Form.Group>
 
         {employees && (
