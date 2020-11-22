@@ -6,9 +6,11 @@ import { createPayroll } from "../store/actions/payrollActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
 import { listEmployee } from "../store/actions/employeeActions";
-import DatePicker from "react-multi-date-picker";
-import "react-multi-date-picker/styles/colors/red.css";
-import "react-multi-date-picker/styles/layouts/mobile.css";
+// import DatePicker from "react-multi-date-picker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+// import "react-multi-date-picker/styles/colors/red.css";
+// import "react-multi-date-picker/styles/layouts/mobile.css";
 
 const CreatePayrollScreen = ({ location, history }) => {
   const [pay, setPay] = useState("");
@@ -80,26 +82,18 @@ const CreatePayrollScreen = ({ location, history }) => {
 
         <Form.Group controlId="month">
           <Form.Label> Month</Form.Label>
-          {/* <Form.Control
-            type="number"
-            placeholder="Enter month"
-            value={month}
-            onChange={(e) => setMonth(e.target.value)}
-          ></Form.Control> */}
+          <br></br>
           <DatePicker
-            onlyMonthPicker
-            format="MMMM YYYY"
-            placeholder="Click to select date"
-            type="input-icon"
+            selected={month}
+            onChange={(date) => setMonth(date)}
+            dateFormat="MM/yyyy"
+            showMonthYearPicker
             style={{
-              backgroundColor: "fff00f",
+              backgroundColor: "f0f00f",
               height: "40px",
               width: "520px",
-              borderRadius: "8px",
-              fontSize: "14px",
               padding: "20px 20px",
             }}
-            //onChange={setMonth}
           />
         </Form.Group>
 

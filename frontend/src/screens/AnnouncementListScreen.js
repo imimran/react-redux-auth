@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { listAnnouncement } from "../store/actions/announcementActions";
 import { Link } from 'react-router-dom'
+import Moment from "react-moment";
 
 const AnnouncementListScreen = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,12 @@ const AnnouncementListScreen = () => {
                   <td>{announcement.id}</td>
                   <td>{announcement.message}</td>
                   <td>{announcement.organization.name}</td>
-                  <td>{announcement.createdAt}</td>
+                  <td>
+                    {" "}
+                    <Moment format="MMMM Do YYYY, h:mm:ss a">
+                      {announcement.createdAt}
+                    </Moment>
+                  </td>
                 </tr>
               ))
             ) : (

@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { listPayroll } from "../store/actions/payrollActions";
+import Moment from "react-moment";
 
 
 const PayrollListScreen = () => {
@@ -32,7 +33,7 @@ const PayrollListScreen = () => {
             <th>Total Pay</th>
             <th> Due Ammount</th>
             <th>Month</th>
-            <th>Year</th>
+
             <th>Organization</th>
             <th>Employee</th>
           </tr>
@@ -46,8 +47,15 @@ const PayrollListScreen = () => {
 
                   <td>{payroll.pay}</td>
                   <td>{payroll.due}</td>
-                  <td>{payroll.month}</td>
-                  <td>{payroll.year}</td>
+                  
+
+                <td>
+                    {" "}
+                    <Moment format="MMMM YYYY">
+                      {payroll.month}
+                    </Moment>
+                  </td>
+
                   <td>{payroll.organization.name}</td>
                   <td>{payroll.employee.name}</td>
                 </tr>
