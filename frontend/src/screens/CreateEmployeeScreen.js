@@ -160,6 +160,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
             <Select options={options} onChange={handleSelectChange} />
           )}
         </Form.Group>
+        
         <Form.Group controlId="image">
           <Form.Label> Image</Form.Label>
           <Form.File

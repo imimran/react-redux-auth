@@ -6,6 +6,7 @@ import { createAttendence } from "../store/actions/attendenceActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
 import { listEmployee } from "../store/actions/employeeActions";
+import Select from "react-select";
 
 const CreateAttendenceScreen = ({ location, history }) => {
   const [day, setDay] = useState("");
@@ -41,8 +42,17 @@ const CreateAttendenceScreen = ({ location, history }) => {
     dispatch(createAttendence(day, status, employeeId, organizationId));
   };
 
-  const handleOrganizationChange = (e) => {
-    setOrganizationId(e);
+  const options = [];
+  console.log("organizations", organizations);
+  if (organizations) {
+    organizations.map((organization) =>
+      options.push({ value: organization.id, label: organization.name })
+    );
+  }
+
+  const handleSelectChange = (options) => {
+    console.log("handle", options);
+    setOrganizationId(options.value);
   };
 
   const handleEmployeeChange = (e) => {
@@ -111,22 +121,12 @@ const CreateAttendenceScreen = ({ location, history }) => {
           </Form.Group>
         )}
 
-        {organizations && organizations.length > 0 && (
-          <Form.Group controlId="organizationId">
-            <Form.Label> Select Organization</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={(e) => handleOrganizationChange(e.target.value)}
-            >
-              <option>Select Organization</option>
-              {organizations.map((organization, index) => (
-                <option value={organization.id} key={index}>
-                  {organization.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        )}
+        <Form.Group>
+          <Form.Label> Select Organization</Form.Label>
+          {organizations && organizations.length > 0 && (
+            <Select options={options} onChange={handleSelectChange} />
+          )}
+        </Form.Group>
 
         <Button type="submit" variant="primary">
           Create Attendence

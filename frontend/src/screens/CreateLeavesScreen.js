@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
@@ -49,9 +50,19 @@ const CreateLeavesScreen = ({ location, history }) => {
     );
   };
 
-  const handleOrganizationChange = (e) => {
-    setOrganizationId(e);
+  const options = [];
+  console.log("organizations", organizations);
+  if (organizations) {
+    organizations.map((organization) =>
+      options.push({ value: organization.id, label: organization.name })
+    );
+  }
+
+  const handleSelectChange = (options) => {
+    console.log("handle", options);
+    setOrganizationId(options.value);
   };
+
 
   const handleEmployeeChange = (e) => {
     setEmployeeId(e);
@@ -115,22 +126,12 @@ const CreateLeavesScreen = ({ location, history }) => {
           </Form.Control>
         </Form.Group>
 
-        {organizations && organizations.length > 0 && (
-          <Form.Group controlId="organizationId">
-            <Form.Label> Select Organization</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={(e) => handleOrganizationChange(e.target.value)}
-            >
-              <option>Select Organization </option>
-              {organizations.map((organization, index) => (
-                <option value={organization.id} key={index}>
-                  {organization.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        )}
+        <Form.Group>
+          <Form.Label> Select Organization</Form.Label>
+          {organizations && organizations.length > 0 && (
+            <Select options={options} onChange={handleSelectChange} />
+          )}
+        </Form.Group>
 
         {employees && employees.length > 0 && (
           <Form.Group controlId="employeeId">

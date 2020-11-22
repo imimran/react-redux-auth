@@ -5,7 +5,7 @@ import FormContainer from "../components/FormContainer";
 import { createAnnouncement } from "../store/actions/announcementActions";
 import Message from "../components/Message";
 import { listOrganization } from "../store/actions/organizationAction";
-
+import Select from "react-select";
 
 const CreateAnouncementScreen = ({ location, history }) => {
   const [message, setMessage] = useState("");
@@ -33,9 +33,19 @@ const CreateAnouncementScreen = ({ location, history }) => {
     dispatch(createAnnouncement(message, organizationId));
   };
 
-    const handleOrganizationChange = (e) => {
-      setOrganizationId(e);
-    };
+  const options = [];
+  console.log("organizations", organizations);
+  if (organizations) {
+    organizations.map((organization) =>
+      options.push({ value: organization.id, label: organization.name })
+    );
+  }
+
+  const handleSelectChange = (options) => {
+    console.log("handle", options);
+    setOrganizationId(options.value);
+  };
+
 
   return (
     <FormContainer>
@@ -45,30 +55,23 @@ const CreateAnouncementScreen = ({ location, history }) => {
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="message">
           <Form.Label> Announcement</Form.Label>
-          
-           <Form.Control as="textarea" rows={3} 
+
+          <Form.Control
+            as="textarea"
+            rows={3}
             type="text"
             placeholder="Enter message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        {organizations && organizations.length > 0 && (
-          <Form.Group controlId="organizationId">
-            <Form.Label> Select Organization</Form.Label>
-            <Form.Control
-              as="select"
-              onChange={(e) => handleOrganizationChange(e.target.value)}
-            >
-              <option>Select Organization</option>
-              {organizations.map((organization, index) => (
-                <option value={organization.id} key={index}>
-                  {organization.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        )}
+
+        <Form.Group>
+          <Form.Label> Select Organization</Form.Label>
+          {organizations && organizations.length > 0 && (
+            <Select options={options} onChange={handleSelectChange} />
+          )}
+        </Form.Group>
         <Button type="submit" variant="primary">
           Create Anouncement
         </Button>
