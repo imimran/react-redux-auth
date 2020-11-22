@@ -3,10 +3,14 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import { listLeave } from "../store/actions/leavesActions";
+
 import moment from "moment";
 
 const LeaveListScreen = () => {
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const listOfLeave = useSelector((state) => state.listOfLeave);
   const { leaves } = listOfLeave;
@@ -16,6 +20,8 @@ const LeaveListScreen = () => {
   }, [dispatch]);
   return (
     <>
+
+     {userInfo && userInfo.isEmployee && (
       <Link
         to="/leave/create"
         className="btn btn-primary"
@@ -23,6 +29,8 @@ const LeaveListScreen = () => {
       >
         Add Leave Request
       </Link>
+     )}
+
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -50,7 +58,7 @@ const LeaveListScreen = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={5}>No data found</td>
+                <td colSpan={6}>No data found</td>
               </tr>
             )}
           </tbody>

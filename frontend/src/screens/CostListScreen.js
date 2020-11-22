@@ -7,6 +7,9 @@ import {Link} from 'react-router-dom'
 const CostListScreen = () => {
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const listOfCost = useSelector((state) => state.listOfCost);
   const { costs } = listOfCost;
 
@@ -15,13 +18,16 @@ const CostListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      <Link
-        to="/cost/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add Cost
-      </Link>
+      {userInfo.results.isOrganizer && (
+        <Link
+          to="/cost/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add Cost
+        </Link>
+      )}
+
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

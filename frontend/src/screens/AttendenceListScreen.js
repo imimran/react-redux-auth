@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 const AttendenceListScreen = () => {
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const listOfAttendence = useSelector((state) => state.listOfAttendence);
   const { loading, error, attendences } = listOfAttendence;
 
@@ -16,13 +19,16 @@ const AttendenceListScreen = () => {
 
   return (
     <>
-      <Link
-        to="/attendence/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add attendence
-      </Link>
+      {userInfo.results.isOrganizer && (
+        <Link
+          to="/attendence/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add attendence
+        </Link>
+      )}
+
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

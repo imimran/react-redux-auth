@@ -9,6 +9,9 @@ import Moment from "react-moment";
 const PayrollListScreen = () => {
   const dispatch = useDispatch();
 
+   const userLogin = useSelector((state) => state.userLogin);
+   const { userInfo } = userLogin;
+
   const listOfPayroll = useSelector((state) => state.listOfPayroll);
   const {  payrolls } = listOfPayroll;
 
@@ -19,13 +22,15 @@ const PayrollListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      <Link
-        to="/payroll/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Create Payslip
-      </Link>
+      {userInfo.results.isOrganizer && (
+        <Link
+          to="/payroll/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Create Payslip
+        </Link>
+      )}
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -47,13 +52,10 @@ const PayrollListScreen = () => {
 
                   <td>{payroll.pay}</td>
                   <td>{payroll.due}</td>
-                  
 
-                <td>
+                  <td>
                     {" "}
-                    <Moment format="MMMM YYYY">
-                      {payroll.month}
-                    </Moment>
+                    <Moment format="MMMM YYYY">{payroll.month}</Moment>
                   </td>
 
                   <td>{payroll.organization.name}</td>
@@ -62,7 +64,7 @@ const PayrollListScreen = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={5}>No data found</td>
+                <td colSpan={6}>No data found</td>
               </tr>
             )}
           </tbody>

@@ -9,6 +9,9 @@ const OrganizationListScreen = () => {
 
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const listOfOrganization = useSelector((state) => state.listOfOrganization)
   const { organizations  } = listOfOrganization
  
@@ -19,13 +22,16 @@ const OrganizationListScreen = () => {
 
   return (
     <>
-      <Link
-        to="/organization/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add Organization
-      </Link>
+      { userInfo.results.isOrganizer && (
+        <Link
+          to="/organization/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add Organization
+        </Link>
+      )}
+
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -34,7 +40,6 @@ const OrganizationListScreen = () => {
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
-           
           </tr>
         </thead>
         {organizations && (
@@ -47,7 +52,6 @@ const OrganizationListScreen = () => {
                   <td>{organization.email}</td>
                   <td>{organization.phone}</td>
                   <td>{organization.address}</td>
-                 
                 </tr>
               ))
             ) : (

@@ -10,6 +10,9 @@ import { listOrganization } from "../store/actions/organizationAction";
 const EmployeeListScreen = () => {
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const listOfEmployee = useSelector((state) => state.listOfEmployee);
   const { employees } = listOfEmployee;
 
@@ -31,13 +34,15 @@ const EmployeeListScreen = () => {
   };
   return (
     <>
-      <Link
-        to="/employee/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add Employee
-      </Link>
+      {userInfo.results.isOrganizer && (
+        <Link
+          to="/employee/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add Employee
+        </Link>
+      )}
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

@@ -8,6 +8,9 @@ import Moment from "react-moment";
 const AnnouncementListScreen = () => {
   const dispatch = useDispatch();
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const listOfAnnouncement = useSelector((state) => state.listOfAnnouncement);
   const { announcements } = listOfAnnouncement;
   
@@ -17,13 +20,16 @@ const AnnouncementListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      <Link
-        to="/announcement/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add announcement
-      </Link>
+      {userInfo.results.isOrganizer && (
+        <Link
+          to="/announcement/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add announcement
+        </Link>
+      )}
+
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

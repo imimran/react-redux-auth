@@ -24,10 +24,13 @@ import LeaveListScreen from './screens/LeaveListScreen'
 import UpdateEmployeeScreen from './screens/UpdateEmployeeScreen'
 import EmployeeDetailsScreen from './screens/EmployeeDetailsScreen'
 import ErrorScreen from './screens/ErrorScreen';
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 const App = () => {
+   const userLogin = useSelector((state) => state.userLogin);
+   const { userInfo } = userLogin;
   //const token = localStorage.getItem("authToken") 
   return (
     <Router>
@@ -51,7 +54,9 @@ const App = () => {
             <PrivateRoute path="/leaves" component={LeaveListScreen} />
 
             <PrivateRoute path="/cost/create" component={CreateCostScreen} />
-            <PrivateRoute path="/costs" component={CostListScreen} />
+           
+              <PrivateRoute path="/costs" component={CostListScreen} />
+            
 
             <PrivateRoute
               path="/payroll/create"
@@ -83,20 +88,24 @@ const App = () => {
               component={EmployeeDetailsScreen}
               exact
             />
-            <PrivateRoute path="/employees" component={EmployeeListScreen} />
-            {/* <PrivateRoute path="/employee-list" component={ListOfEmployeeScreen} /> */}
+           
+              <PrivateRoute path="/employees" component={EmployeeListScreen} />
+            
 
             <PrivateRoute
               path="/organization/create"
               component={OrganizationScreen}
             />
-            <PrivateRoute
-              path="/organizations"
-              component={OrganizationListScreen}
-            />
+
+           
+              <PrivateRoute
+            path="/organizations"
+                component={OrganizationListScreen}
+              />
+            )}
+
             <PrivateRoute path="/" component={HomeScreen} exact />
             <Route path="*" component={ErrorScreen} />
-           
           </Switch>
         </Container>
       </main>
