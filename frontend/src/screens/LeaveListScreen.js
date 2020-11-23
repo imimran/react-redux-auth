@@ -20,16 +20,15 @@ const LeaveListScreen = () => {
   }, [dispatch]);
   return (
     <>
-
-     {userInfo && userInfo.isEmployee && (
-      <Link
-        to="/leave/create"
-        className="btn btn-primary"
-        style={{ marginBottom: 20 }}
-      >
-        Add Leave Request
-      </Link>
-     )}
+      {userInfo.results.isEmployee && (
+        <Link
+          to="/leave/create"
+          className="btn btn-primary"
+          style={{ marginBottom: 20 }}
+        >
+          Add Leave Request
+        </Link>
+      )}
 
       <Table striped bordered hover variant="dark">
         <thead>

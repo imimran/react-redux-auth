@@ -31,7 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 const App = () => {
    const userLogin = useSelector((state) => state.userLogin);
    const { userInfo } = userLogin;
-  //const token = localStorage.getItem("authToken") 
+ 
   return (
     <Router>
       <Header />
@@ -54,9 +54,10 @@ const App = () => {
             <PrivateRoute path="/leaves" component={LeaveListScreen} />
 
             <PrivateRoute path="/cost/create" component={CreateCostScreen} />
-           
-              <PrivateRoute path="/costs" component={CostListScreen} />
-            
+
+             {userInfo.results.isOrganizer && (
+            <PrivateRoute path="/costs" component={CostListScreen} />
+             )}
 
             <PrivateRoute
               path="/payroll/create"
@@ -88,18 +89,18 @@ const App = () => {
               component={EmployeeDetailsScreen}
               exact
             />
-           
+            {userInfo.results.isOrganizer && (
               <PrivateRoute path="/employees" component={EmployeeListScreen} />
-            
+            )}
 
             <PrivateRoute
               path="/organization/create"
               component={OrganizationScreen}
             />
 
-           
+            {userInfo.results.isOrganizer && (
               <PrivateRoute
-            path="/organizations"
+                path="/organizations"
                 component={OrganizationListScreen}
               />
             )}

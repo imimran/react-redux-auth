@@ -21,7 +21,9 @@ const CreateCostScreen = ({ location, history }) => {
   const listOfOrganization = useSelector((state) => state.listOfOrganization);
   const { organizations } = listOfOrganization;
 
-   const redirect = location.search ? location.search.spilt("=")[1] : "/costs";
+   const redirect = location.search
+     ? location.search.split("=")[1]
+     : "/costs";
 
   useEffect(() => {
     if (cost) {

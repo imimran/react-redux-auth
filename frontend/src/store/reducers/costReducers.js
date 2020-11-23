@@ -19,7 +19,7 @@ export const createCostReducer =(state=initialstate, action) =>{
             }
         case CREATE_COST_SUCCESS:
             return{
-                loading: false, payroll: action.payload
+                loading: false, cost: action.payload
             }    
         case CREATE_COST_FAIL:
             return{

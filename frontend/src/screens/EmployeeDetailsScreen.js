@@ -18,7 +18,7 @@ const EmployeeDetailsScreen = ({ match }) => {
 
   return (
     <>
-      <Container style={{ float: "left", padding: "60px" }}>
+      <Container style={{ float: "left", padding: "130px" }}>
         <Row>
           <Col>
             <Card style={{ width: "70%" }}>
