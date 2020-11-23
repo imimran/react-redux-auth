@@ -20,7 +20,7 @@ const AnnouncementListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      {userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/announcement/create"
           className="btn btn-primary"

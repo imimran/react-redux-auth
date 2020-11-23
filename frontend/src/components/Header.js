@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { logout } from "../store/actions/userActions";
+import { employeeLogout } from "../store/actions/employeeLoginAction";
 
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -20,9 +21,17 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+   const employeeLogin = useSelector((state) => state.employeeLogin);
+   const { employeeInfo } = employeeLogin;
+
   const logoutHandler = () => {
     dispatch(logout());
+
   };
+
+    const employeelogoutHandler = () => {
+      dispatch(employeeLogout());
+    };
 
   return (
     <header>
@@ -60,6 +69,25 @@ const Header = () => {
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              {employeeInfo ? (
+                <NavDropdown title={employeeInfo.email} id="username">
+                  <NavDropdown.Item onClick={employeelogoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to="/employee-login">
+                  <Nav.Link>
+                    <i className="fas fa-user"></i> Employee LogIn
+                  </Nav.Link>
+                </LinkContainer>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {userInfo ? (

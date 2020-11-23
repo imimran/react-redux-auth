@@ -34,7 +34,7 @@ const EmployeeListScreen = () => {
   };
   return (
     <>
-      {userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/employee/create"
           className="btn btn-primary"

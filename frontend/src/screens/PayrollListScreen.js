@@ -22,7 +22,7 @@ const PayrollListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      {userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/payroll/create"
           className="btn btn-primary"

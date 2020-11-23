@@ -19,6 +19,7 @@ import {createAttendenceReducer, attendenceListReducer} from "../store/reducers/
 import {costListReducer, createCostReducer} from "../store/reducers/costReducers";
 import {createPayrollReducer, payrollListReducer} from "../store/reducers/payrollReducer";
 import {createLeaveReducer, leaveListReducer} from "../store/reducers/leavesReducers";
+import { employeeLoginReducer } from "../store/reducers/employeeLoginReducer";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -40,6 +41,7 @@ const reducer = combineReducers({
   listOfPayroll: payrollListReducer,
   addLeave: createLeaveReducer,
   listOfLeave: leaveListReducer,
+  employeeLogin: employeeLoginReducer
 });
 
 console.log(employeeDetailsReducer);

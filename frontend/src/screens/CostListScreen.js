@@ -18,7 +18,7 @@ const CostListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      {userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/cost/create"
           className="btn btn-primary"

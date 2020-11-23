@@ -22,7 +22,7 @@ const OrganizationListScreen = () => {
 
   return (
     <>
-      { userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/organization/create"
           className="btn btn-primary"

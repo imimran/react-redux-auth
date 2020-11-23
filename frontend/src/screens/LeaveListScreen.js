@@ -20,7 +20,7 @@ const LeaveListScreen = () => {
   }, [dispatch]);
   return (
     <>
-      {userInfo.results.isEmployee && (
+      {userInfo && userInfo.results &&  userInfo.results.isEmployee && (
         <Link
           to="/leave/create"
           className="btn btn-primary"

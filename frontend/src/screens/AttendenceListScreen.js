@@ -19,7 +19,7 @@ const AttendenceListScreen = () => {
 
   return (
     <>
-      {userInfo.results.isOrganizer && (
+      {userInfo && userInfo.results && userInfo.results.isOrganizer && (
         <Link
           to="/attendence/create"
           className="btn btn-primary"

@@ -25,6 +25,7 @@ import UpdateEmployeeScreen from './screens/UpdateEmployeeScreen'
 import EmployeeDetailsScreen from './screens/EmployeeDetailsScreen'
 import ErrorScreen from './screens/ErrorScreen';
 import { useDispatch, useSelector } from "react-redux";
+import EmployeeLoginScreen from './screens/EmployeeLoginScreen';
 
 
 
@@ -39,6 +40,7 @@ const App = () => {
         <Container>
           <Switch>
             <Route path="/login" component={LoginScreen} />
+            <Route path="/employee-login" component={EmployeeLoginScreen} />
             <Route path="/register" component={RegisterScreen} />
             <PrivateRoute
               path="/announcements"
@@ -55,10 +57,6 @@ const App = () => {
 
             <PrivateRoute path="/cost/create" component={CreateCostScreen} />
 
-             {userInfo.results.isOrganizer && (
-            <PrivateRoute path="/costs" component={CostListScreen} />
-             )}
-
             <PrivateRoute
               path="/payroll/create"
               component={CreatePayrollScreen}
@@ -74,35 +72,42 @@ const App = () => {
               path="/attendences"
               component={AttendenceListScreen}
             />
-            <PrivateRoute
-              path="/employee/create"
-              component={CreateEmployeeScreen}
-            />
 
-            <PrivateRoute
-              path="/employee/edit/:id"
-              component={UpdateEmployeeScreen}
-            />
+            {userInfo && userInfo.results && userInfo.results.isOrganizer && (
+              <>
+                <PrivateRoute path="/costs" component={CostListScreen} />
 
-            <PrivateRoute
-              path="/employee/:id"
-              component={EmployeeDetailsScreen}
-              exact
-            />
-            {userInfo.results.isOrganizer && (
-              <PrivateRoute path="/employees" component={EmployeeListScreen} />
-            )}
+                <PrivateRoute
+                  path="/employee/create"
+                  component={CreateEmployeeScreen}
+                />
 
-            <PrivateRoute
-              path="/organization/create"
-              component={OrganizationScreen}
-            />
+                <PrivateRoute
+                  path="/employee/edit/:id"
+                  component={UpdateEmployeeScreen}
+                />
 
-            {userInfo.results.isOrganizer && (
-              <PrivateRoute
-                path="/organizations"
-                component={OrganizationListScreen}
-              />
+                <PrivateRoute
+                  path="/employee/:id"
+                  component={EmployeeDetailsScreen}
+                  exact
+                />
+
+                <PrivateRoute
+                  path="/employees"
+                  component={EmployeeListScreen}
+                />
+
+                <PrivateRoute
+                  path="/organization/create"
+                  component={OrganizationScreen}
+                />
+
+                <PrivateRoute
+                  path="/organizations"
+                  component={OrganizationListScreen}
+                />
+              </>
             )}
 
             <PrivateRoute path="/" component={HomeScreen} exact />
