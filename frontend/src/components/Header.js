@@ -54,20 +54,46 @@ const Header = () => {
                     <AiIcons.AiOutlineClose />
                   </Link>
                 </li>
-                {
-                    userInfo.results.isEmployee
-                      ? EmployeeSidebarData.map((item, index) => {
-                          return (
-                            <li key={index} className={item.cName}>
-                              <Link to={item.path}>
-                                {item.icon}
-                                <span>{item.title}</span>
-                              </Link>
-                            </li>
-                          );
-                        })
-                      : ""
-                  }
+                {userInfo &&
+                  userInfo.results &&
+                  userInfo.results.isEmployee &&
+                  EmployeeSidebarData.map((item, index) => {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                {userInfo &&
+                  userInfo.results &&
+                  userInfo.results.isOrganizer &&
+                  OrganizerSidebarData.map((item, index) => {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+
+                {userInfo &&
+                  userInfo.results &&
+                  userInfo.results.isAdmin &&
+                  AdminSidebarData.map((item, index) => {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
               </ul>
             </Nav>
           </IconContext.Provider>
