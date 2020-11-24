@@ -8,7 +8,7 @@ import * as BsIcons from "react-icons/bs";
 // const userLogin = useSelector((state) => state.userLogin);
 // const { userInfo } = userLogin;
 
-export const SidebarData = [
+export const OrganizerSidebarData = [
   {
     title: "Home",
     path: "/",

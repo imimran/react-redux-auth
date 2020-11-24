@@ -8,7 +8,7 @@ import { employeeLogout } from "../store/actions/employeeLoginAction";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./SidebarData";
+import { OrganizerSidebarData } from "./OrganizerSidebarData";
 import { EmployeeSidebarData } from "./EmployeeSidebarData";
 import { AdminSidebarData } from "./AdminSidebarData";
 import "./Navbar.css";
@@ -53,7 +53,7 @@ const Header = () => {
                   </Link>
                 </li>
               
-                {SidebarData.map((item, index) => {
+                {OrganizerSidebarData.map((item, index) => {
                   return (
                     <li key={index} className={item.cName}>
                       <Link to={item.path}>
