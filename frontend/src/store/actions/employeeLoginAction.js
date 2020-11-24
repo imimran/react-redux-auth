@@ -17,7 +17,7 @@ export const login = (email, password) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        //"auth-token": localStorage.getItem("authToken"),
+        "auth-token": localStorage.getItem("authToken"),
       },
     };
 

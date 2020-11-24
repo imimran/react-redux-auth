@@ -25,7 +25,7 @@ const Header = () => {
 
    const employeeLogin = useSelector((state) => state.employeeLogin);
    const { employeeInfo } = employeeLogin;
-  //console.log(userInfo);
+  console.log(employeeInfo);
 
 
   const logoutHandler = () => {
@@ -54,6 +54,20 @@ const Header = () => {
                     <AiIcons.AiOutlineClose />
                   </Link>
                 </li>
+                {employeeInfo &&
+                  employeeInfo.results &&
+                  employeeInfo.results.isLogin &&
+                  EmployeeSidebarData.map((item, index) => {
+                    return (
+                      <li key={index} className={item.cName}>
+                        <Link to={item.path}>
+                          {item.icon}
+                          <span>{item.title}</span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+
                 {userInfo &&
                   userInfo.results &&
                   userInfo.results.isEmployee &&
@@ -67,6 +81,8 @@ const Header = () => {
                       </li>
                     );
                   })}
+
+                  
                 {userInfo &&
                   userInfo.results &&
                   userInfo.results.isOrganizer &&
@@ -107,7 +123,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {employeeInfo ? (
-                <NavDropdown title={employeeInfo.email} id="username">
+                <NavDropdown title={employeeInfo.results.email} id="username">
                   <NavDropdown.Item onClick={employeelogoutHandler}>
                     Logout
                   </NavDropdown.Item>
@@ -120,12 +136,12 @@ const Header = () => {
                 </LinkContainer>
               )}
             </Nav>
-          </Navbar.Collapse>
+          </Navbar.Collapse> 
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
               {userInfo ? (
-                <NavDropdown title={userInfo.email} id="username">
+                <NavDropdown title={userInfo.results.email} id="username">
                   <NavDropdown.Item onClick={logoutHandler}>
                     Logout
                   </NavDropdown.Item>

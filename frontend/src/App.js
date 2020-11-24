@@ -42,6 +42,7 @@ const App = () => {
             <Route path="/login" component={LoginScreen} />
             <Route path="/employee-login" component={EmployeeLoginScreen} />
             <Route path="/register" component={RegisterScreen} />
+            <PrivateRoute path="/" component={HomeScreen} exact />
             <PrivateRoute
               path="/announcements"
               component={AnnouncementListScreen}
@@ -110,7 +111,6 @@ const App = () => {
               </>
             )}
 
-            <PrivateRoute path="/" component={HomeScreen} exact />
             <Route path="*" component={ErrorScreen} />
           </Switch>
         </Container>
