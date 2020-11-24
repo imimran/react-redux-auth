@@ -25,6 +25,8 @@ const Header = () => {
 
    const employeeLogin = useSelector((state) => state.employeeLogin);
    const { employeeInfo } = employeeLogin;
+  //console.log(userInfo);
+
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -52,17 +54,20 @@ const Header = () => {
                     <AiIcons.AiOutlineClose />
                   </Link>
                 </li>
-              
-                {OrganizerSidebarData.map((item, index) => {
-                  return (
-                    <li key={index} className={item.cName}>
-                      <Link to={item.path}>
-                        {item.icon}
-                        <span>{item.title}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
+                {
+                    userInfo.results.isEmployee
+                      ? EmployeeSidebarData.map((item, index) => {
+                          return (
+                            <li key={index} className={item.cName}>
+                              <Link to={item.path}>
+                                {item.icon}
+                                <span>{item.title}</span>
+                              </Link>
+                            </li>
+                          );
+                        })
+                      : ""
+                  }
               </ul>
             </Nav>
           </IconContext.Provider>
