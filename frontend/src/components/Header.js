@@ -9,7 +9,8 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
-import { employeeSidebarData } from "./EmployeeSidebarData";
+import { EmployeeSidebarData } from "./EmployeeSidebarData";
+import { AdminSidebarData } from "./AdminSidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
 
