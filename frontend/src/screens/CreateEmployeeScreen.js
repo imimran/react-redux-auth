@@ -10,6 +10,7 @@ import { listOrganization } from "../store/actions/organizationAction";
 const CreateEmployeeScreen = ({ location, history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [salary, setSalary] = useState("");
@@ -58,6 +59,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
       createEmployee(
         name,
         email,
+        password,
         phone,
         address,
         salary,
@@ -101,6 +103,16 @@ const CreateEmployeeScreen = ({ location, history }) => {
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId="password">
+          <Form.Label>Password </Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
@@ -160,7 +172,7 @@ const CreateEmployeeScreen = ({ location, history }) => {
             <Select options={options} onChange={handleSelectChange} />
           )}
         </Form.Group>
-        
+
         <Form.Group controlId="image">
           <Form.Label> Image</Form.Label>
           <Form.File

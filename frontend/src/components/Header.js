@@ -25,6 +25,7 @@ const Header = () => {
 
    const employeeLogin = useSelector((state) => state.employeeLogin);
    const { employeeInfo } = employeeLogin;
+   
   console.log(employeeInfo);
 
 
@@ -56,7 +57,7 @@ const Header = () => {
                 </li>
                 {employeeInfo &&
                   employeeInfo.results &&
-                  employeeInfo.results.isLogin &&
+                  employeeInfo.results.isValid &&
                   EmployeeSidebarData.map((item, index) => {
                     return (
                       <li key={index} className={item.cName}>
@@ -82,7 +83,6 @@ const Header = () => {
                     );
                   })}
 
-                  
                 {userInfo &&
                   userInfo.results &&
                   userInfo.results.isOrganizer &&
@@ -136,7 +136,7 @@ const Header = () => {
                 </LinkContainer>
               )}
             </Nav>
-          </Navbar.Collapse> 
+          </Navbar.Collapse>
 
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">

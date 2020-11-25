@@ -12,6 +12,9 @@ const LeaveListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+    const employeeLogin = useSelector((state) => state.employeeLogin);
+    const { employeeInfo } = employeeLogin;
+
   const listOfLeave = useSelector((state) => state.listOfLeave);
   const { leaves } = listOfLeave;
 

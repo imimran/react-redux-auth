@@ -71,7 +71,7 @@ const EmployeeDetailsScreen = ({ match }) => {
                 </Card>
               </Tab>
 
-              <Tab eventKey="document" title="Document" disabled></Tab>
+
             </Tabs>
           </Col>
         </Row>

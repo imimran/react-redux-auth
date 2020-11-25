@@ -22,6 +22,7 @@ import setAuthToken from "../../utils/setAuthToken";
 export const createEmployee = (
   name,
   email,
+  password,
   phone,
   address,
   salary,
@@ -42,6 +43,7 @@ export const createEmployee = (
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
+    formData.append("password", password);
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("salary", salary);
