@@ -53,6 +53,8 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("authToken");
+  localStorage.removeItem("employeeDetails");
+  localStorage.removeItem("updateEmployee");
   localStorage.removeItem("organization");
   localStorage.removeItem("organizations");
   localStorage.removeItem("employee");
