@@ -29,7 +29,7 @@ const AnnouncementListScreen = () => {
           Add announcement
         </Link>
       )}
-
+     
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -63,6 +63,7 @@ const AnnouncementListScreen = () => {
           </tbody>
         )}
       </Table>
+      
     </>
   );
 };
