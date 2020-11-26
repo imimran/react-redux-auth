@@ -10,7 +10,7 @@ import {
 
 import setAuthToken from "../../utils/setAuthToken";
 
-export const createAnnouncement = (message, organizationId) => async (dispatch) => {
+export const createAnnouncement = (message, organizationId, employeeId) => async (dispatch) => {
   try {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
@@ -29,7 +29,7 @@ export const createAnnouncement = (message, organizationId) => async (dispatch) 
 
     const { data } = await axios.post(
       "http://localhost:4000/api/announcement",
-      { message, organizationId },
+      { message, organizationId, employeeId },
       config
     );
 
