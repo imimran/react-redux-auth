@@ -19,19 +19,19 @@ const CreateLeavesScreen = ({ location, history }) => {
   const [leaveForDays, setLeaveForDays] = useState([today, tomorrow]);
   const [reason, setReason] = useState("");
   const [status, setStatus] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
-  const [organizationId, setOrganizationId] = useState("");
+  // const [employeeId, setEmployeeId] = useState("");
+  // const [organizationId, setOrganizationId] = useState("");
 
   const dispatch = useDispatch();
 
   const addLeave = useSelector((state) => state.addLeave);
   const { error, leave } = addLeave;
 
-  const listOfOrganization = useSelector((state) => state.listOfOrganization);
-  const { organizations } = listOfOrganization;
+  // const listOfOrganization = useSelector((state) => state.listOfOrganization);
+  // const { organizations } = listOfOrganization;
 
-  const listOfEmployee = useSelector((state) => state.listOfEmployee);
-  const { employees } = listOfEmployee;
+  // const listOfEmployee = useSelector((state) => state.listOfEmployee);
+  // const { employees } = listOfEmployee;
 
   const redirect = location.search ? location.search.spilt("=")[1] : "/leaves";
 
@@ -46,27 +46,27 @@ const CreateLeavesScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
-      createLeave(leaveForDays, reason, status, organizationId, employeeId)
+      createLeave(leaveForDays, reason, status)
     );
   };
 
-  const options = [];
-  console.log("organizations", organizations);
-  if (organizations) {
-    organizations.map((organization) =>
-      options.push({ value: organization.id, label: organization.name })
-    );
-  }
+  // const options = [];
+  // console.log("organizations", organizations);
+  // if (organizations) {
+  //   organizations.map((organization) =>
+  //     options.push({ value: organization.id, label: organization.name })
+  //   );
+  // }
 
-  const handleSelectChange = (options) => {
-    console.log("handle", options);
-    setOrganizationId(options.value);
-  };
+  // const handleSelectChange = (options) => {
+  //   console.log("handle", options);
+  //   setOrganizationId(options.value);
+  // };
 
 
-  const handleEmployeeChange = (e) => {
-    setEmployeeId(e);
-  };
+  // const handleEmployeeChange = (e) => {
+  //   setEmployeeId(e);
+  // };
 
   const handleStatusChange = (e) => {
     setStatus(e);
@@ -126,7 +126,7 @@ const CreateLeavesScreen = ({ location, history }) => {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label> Select Organization</Form.Label>
           {organizations && organizations.length > 0 && (
             <Select options={options} onChange={handleSelectChange} />
@@ -148,7 +148,7 @@ const CreateLeavesScreen = ({ location, history }) => {
               ))}
             </Form.Control>
           </Form.Group>
-        )}
+        )} */}
 
         <Button type="submit" variant="primary">
           Create Leave Request
